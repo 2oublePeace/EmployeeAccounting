@@ -1,3 +1,7 @@
+using EmployeeAccountingBusinessLogic.Interfaces;
+using Ninject;
+using System.Reflection;
+
 namespace EmployeeAccountingView
 {
     internal static class Program
@@ -8,8 +12,9 @@ namespace EmployeeAccountingView
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+            var employeeStorage = kernel.Get<IEmployeeStorage>();
             ApplicationConfiguration.Initialize();
             Application.Run(new FormMain());
         }
