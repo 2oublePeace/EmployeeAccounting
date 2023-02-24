@@ -12,4 +12,9 @@
     <PackageReference Include="Ninject" Version="4.0.0-beta.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeAccountingBusinessLogic\EmployeeAccountingBusinessLogic.csproj" />
+    <ProjectReference Include="..\EmployeeAccountingDatabase\EmployeeAccountingDatabase.csproj" />
+  </ItemGroup>
+
 </Project>
