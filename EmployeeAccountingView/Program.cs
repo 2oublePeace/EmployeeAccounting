@@ -12,9 +12,9 @@ namespace EmployeeAccountingView
         [STAThread]
         static void Main()
         {
-            var kernel = new StandardKernel();
+           /* var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-            var employeeStorage = kernel.Get<IEmployeeStorage>();
+            var employeeStorage = kernel.Get<IEmployeeStorage>();*/
             ApplicationConfiguration.Initialize();
             Application.Run(new FormMain());
         }
