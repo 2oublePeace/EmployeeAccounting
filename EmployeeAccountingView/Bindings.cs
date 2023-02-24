@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmployeeAccountingBusinessLogic.Interfaces;
+using EmployeeAccountingDatabase.Implements;
+using Ninject.Modules;
 
 namespace EmployeeAccountingView
 {
-    internal class Bindings
+    public class Bindings : NinjectModule
     {
+        public override void Load()
+        {
+            Bind<IEmployeeStorage>().To<EmployeeStorage>();
+        }
     }
 }
