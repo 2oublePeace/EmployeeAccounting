@@ -23,6 +23,7 @@ public class EmployeeLogic
             return new List<EmployeeViewModel> { _employeeStorage.GetElement(model) };
         }
         return _employeeStorage.GetFilteredList(model);
+        //TODO: поменять местами GetFullList и GetFilteredList
     }
 
     public void CreateOrUpdate(EmployeeBindingModel model)
