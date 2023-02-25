@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ComponentsLibraryNet60" Version="1.0.0" />
+    <PackageReference Include="ControlsLibraryNet60" Version="1.0.0" />
     <PackageReference Include="Ninject" Version="4.0.0-beta.1" />
   </ItemGroup>
 

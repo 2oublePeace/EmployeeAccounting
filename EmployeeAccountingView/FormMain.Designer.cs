@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.controlDataTableTable1 = new ControlsLibraryNet60.Data.ControlDataTableTable();
+            this.SuspendLayout();
+            // 
+            // controlDataTableTable1
+            // 
+            this.controlDataTableTable1.Location = new System.Drawing.Point(13, 12);
+            this.controlDataTableTable1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.controlDataTableTable1.Name = "controlDataTableTable1";
+            this.controlDataTableTable1.SelectedRowIndex = -1;
+            this.controlDataTableTable1.Size = new System.Drawing.Size(774, 426);
+            this.controlDataTableTable1.TabIndex = 0;
+            // 
+            // FormMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.controlDataTableTable1);
+            this.Name = "FormMain";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private ControlsLibraryNet60.Data.ControlDataTableTable controlDataTableTable1;
     }
 }
