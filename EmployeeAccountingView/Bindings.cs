@@ -1,4 +1,5 @@
-﻿using EmployeeAccountingBusinessLogic.Interfaces;
+﻿using EmployeeAccountingBusinessLogic.BusinessLogic;
+using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingDatabase.Implements;
 using Ninject.Modules;
 
@@ -8,6 +9,7 @@ namespace EmployeeAccountingView
     {
         public override void Load()
         {
+            Bind<EmployeeLogic>().ToSelf();
             Bind<IEmployeeStorage>().To<EmployeeStorage>();
         }
     }

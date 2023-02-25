@@ -11,7 +11,6 @@ public class Employee
     public int? Id { get; set; }
     [Required]
     public string? Fullname { get; set; }
-    [Required]
     public byte[]? Photo { get; set; }
     [Required]
     public EmployeeSkill? Skill { get; set; }

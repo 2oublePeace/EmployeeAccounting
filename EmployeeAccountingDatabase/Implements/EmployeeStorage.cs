@@ -17,7 +17,10 @@ public class EmployeeStorage : IEmployeeStorage
                     employee => new EmployeeViewModel()
                     {
                         Id = employee.Id,
-                        Fullname = employee.Fullname
+                        Fullname = employee.Fullname,
+                        Photo = employee.Photo,
+                        Skill = employee.Skill,
+                        PhoneNumber = employee.PhoneNumber
                     }
                 )
                 .ToList();
@@ -26,12 +29,47 @@ public class EmployeeStorage : IEmployeeStorage
 
     public List<EmployeeViewModel> GetFilteredList(EmployeeBindingModel model)
     {
-        throw new NotImplementedException();
+        if (model == null)
+        {
+            return null;
+        }
+        using (var context = new EmployeeAccountingDatabaseContext())
+        {
+            return context.Employees
+            .Where(employee => employee.Fullname.Contains(model.Fullname))
+            .Select(employee => new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Fullname = employee.Fullname,
+                Photo = employee.Photo,
+                Skill = employee.Skill,
+                PhoneNumber = employee.PhoneNumber
+            })
+            .ToList();
+        }
     }
 
-    public EmployeeViewModel GetElement(EmployeeBindingModel model)
+    public EmployeeViewModel? GetElement(EmployeeBindingModel model)
     {
-        throw new NotImplementedException();
+        if (model == null)
+        {
+            return null;
+        }
+        using (var context = new EmployeeAccountingDatabaseContext())
+        {
+            var employee = context.Employees.FirstOrDefault(employee => employee.Fullname == model.Fullname || employee.Id == model.Id);
+
+            return employee != null ?
+            new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Fullname = employee.Fullname,
+                Photo = employee.Photo,
+                Skill = employee.Skill,
+                PhoneNumber = employee.PhoneNumber
+            } :
+            null;
+        }
     }
 
     public void Insert(EmployeeBindingModel model)
@@ -41,7 +79,10 @@ public class EmployeeStorage : IEmployeeStorage
             context.Add(new Employee()
                 {
                     Id = model.Id,
-                    Fullname = model.Fullname
+                    Fullname = model.Fullname,
+                    Photo = model.Photo,
+                    Skill = model.Skill,
+                    PhoneNumber = model.PhoneNumber
                 }
             );
             context.SaveChanges();
@@ -50,11 +91,35 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Update(EmployeeBindingModel model)
     {
-        throw new NotImplementedException();
+        using (var context = new EmployeeAccountingDatabaseContext())
+        {
+            var employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id);
+            if (employee == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            employee.Fullname = model.Fullname;
+            employee.Photo = model.Photo;
+            employee.Skill = model.Skill;
+            employee.PhoneNumber = model.PhoneNumber;
+            context.SaveChanges();
+        }
     }
 
     public void Delete(EmployeeBindingModel model)
     {
-        throw new NotImplementedException();
+        using (var context = new EmployeeAccountingDatabaseContext())
+        {
+            var employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id);
+            if (employee != null)
+            {
+                context.Employees.Remove(employee);
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Сотрудник не найден");
+            }
+        }
     }
 }

@@ -1,41 +1,26 @@
 using ControlsLibraryNet60.Models;
-using EmployeeAccountingBusinessLogic.BindingModels;
-using EmployeeAccountingBusinessLogic.Enums;
-using EmployeeAccountingBusinessLogic.ViewModels;
+using EmployeeAccountingBusinessLogic.BusinessLogic;
+
 
 namespace EmployeeAccountingView
 {
     public partial class FormMain : Form
     {
-        public FormMain()
+        EmployeeLogic _employeeLogic;
+        public FormMain(EmployeeLogic employeeLogic)
         {
             InitializeComponent();
-            List<EmployeeViewModel> employees = new List<EmployeeViewModel>()
-            {
-                new EmployeeViewModel()
-                {
-                    Id= 1,
-                    Fullname = "Zhizha",
-                    Skill = EmployeeSkill.Лидерство,
-                    PhoneNumber = "fdf23fsdf"
-                },
-                new EmployeeViewModel()
-                {
-                    Id= 2,
-                    Fullname = "Zhiasdaszha",
-                    Skill = EmployeeSkill.Лидерство,
-                    PhoneNumber = "fdfdsfsdf"
-                },
-                new EmployeeViewModel()
-                {
-                    Id= 3,
-                    Fullname = "Zhizss22ha",
-                    Skill = EmployeeSkill.Лидерство,
-                    PhoneNumber = "fdfds122fsdf"
-                }
-            };
+            _employeeLogic = employeeLogic;
+        }
 
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            InitializeTable();
+            controlDataTable.AddTable(_employeeLogic.Read(null));
+        }
 
+        public void InitializeTable()
+        {
             List<DataTableColumnConfig> dataTableColumnConfigs = new List<DataTableColumnConfig>()
             {
                 new DataTableColumnConfig()
@@ -50,25 +35,25 @@ namespace EmployeeAccountingView
                     ColumnHeader = "ФИО",
                     PropertyName = "Fullname",
                     Width = 257,
-                    Visible= true
+                    Visible = true
                 },
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "Навык",
                     PropertyName = "Skill",
                     Width = 257,
-                    Visible= true
+                    Visible = true
                 },
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "Номер телефона",
                     PropertyName = "PhoneNumber",
                     Width = 257,
-                    Visible= true
+                    Visible = true
                 }
             };
-            controlDataTableTable1.LoadColumns(dataTableColumnConfigs);
-            controlDataTableTable1.AddTable(employees);
+
+            controlDataTable.LoadColumns(dataTableColumnConfigs);
         }
     }
 }

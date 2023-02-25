@@ -1,3 +1,4 @@
+using EmployeeAccountingBusinessLogic.BusinessLogic;
 using EmployeeAccountingBusinessLogic.Interfaces;
 using Ninject;
 using System.Reflection;
@@ -15,8 +16,9 @@ namespace EmployeeAccountingView
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
             var employeeStorage = kernel.Get<IEmployeeStorage>();
+            var employeeLogic = kernel.Get<EmployeeLogic>();
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormMain());
+            Application.Run(new FormMain(employeeLogic));
         }
     }
 }
