@@ -1,14 +1,6 @@
-﻿using EmployeeAccountingBusinessLogic.BusinessLogic;
-using Ninject;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using EmployeeAccountingBusinessLogic.BindingModels;
+using EmployeeAccountingBusinessLogic.BusinessLogic;
+using EmployeeAccountingBusinessLogic.Enums;
 
 namespace EmployeeAccountingView
 {
@@ -35,6 +27,40 @@ namespace EmployeeAccountingView
                     photoPictureBox.Image = Image.FromFile(dialog.FileName);
                 }
             }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(fullnameTextBox.Text))
+            {
+                MessageBox.Show("Заполните ФИО сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /*if (string.IsNullOrEmpty(skillsListBox.SelectedElement))
+            {
+                MessageBox.Show("Выберите навык сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }*/
+            _employeeLogic.CreateOrUpdate(new EmployeeBindingModel()
+            {
+                Fullname = fullnameTextBox.Text,
+
+            });
+            MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private EmployeeSkill? GetEmployeeSkillValue(string selectedSkill)
+        {
+            foreach (var skill in Enum.GetValues<EmployeeSkill>())
+            {
+                if (selectedSkill == Enum.GetName(skill))
+                {
+                    return skill;
+                }
+            }
+            return null;
         }
     }
 }

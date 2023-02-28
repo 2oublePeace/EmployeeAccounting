@@ -37,12 +37,18 @@
             this.photoPictureBox = new System.Windows.Forms.PictureBox();
             this.clearPhotoButton = new System.Windows.Forms.Button();
             this.browsePhotoButton = new System.Windows.Forms.Button();
+            this.imageGroupBox = new System.Windows.Forms.GroupBox();
+            this.dataGroupBox = new System.Windows.Forms.GroupBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).BeginInit();
+            this.imageGroupBox.SuspendLayout();
+            this.dataGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // phoneNumberTextBox
             // 
-            this.phoneNumberTextBox.Location = new System.Drawing.Point(12, 265);
+            this.phoneNumberTextBox.Location = new System.Drawing.Point(6, 284);
             this.phoneNumberTextBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.phoneNumberTextBox.Name = "phoneNumberTextBox";
             this.phoneNumberTextBox.Pattern = "^((\\+7|8)+\\(\\d{4}\\))?\\d{0,2}-\\d{0,2}-\\d{0,2}$";
@@ -52,7 +58,7 @@
             // 
             // skillsListBox
             // 
-            this.skillsListBox.Location = new System.Drawing.Point(12, 71);
+            this.skillsListBox.Location = new System.Drawing.Point(6, 90);
             this.skillsListBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.skillsListBox.Name = "skillsListBox";
             this.skillsListBox.SelectedElement = "";
@@ -61,7 +67,7 @@
             // 
             // fullnameTextBox
             // 
-            this.fullnameTextBox.Location = new System.Drawing.Point(12, 27);
+            this.fullnameTextBox.Location = new System.Drawing.Point(6, 46);
             this.fullnameTextBox.Name = "fullnameTextBox";
             this.fullnameTextBox.Size = new System.Drawing.Size(353, 23);
             this.fullnameTextBox.TabIndex = 2;
@@ -69,7 +75,7 @@
             // fullnameLabel
             // 
             this.fullnameLabel.AutoSize = true;
-            this.fullnameLabel.Location = new System.Drawing.Point(12, 9);
+            this.fullnameLabel.Location = new System.Drawing.Point(6, 28);
             this.fullnameLabel.Name = "fullnameLabel";
             this.fullnameLabel.Size = new System.Drawing.Size(34, 15);
             this.fullnameLabel.TabIndex = 3;
@@ -78,7 +84,7 @@
             // skillsLabel
             // 
             this.skillsLabel.AutoSize = true;
-            this.skillsLabel.Location = new System.Drawing.Point(12, 53);
+            this.skillsLabel.Location = new System.Drawing.Point(6, 72);
             this.skillsLabel.Name = "skillsLabel";
             this.skillsLabel.Size = new System.Drawing.Size(50, 15);
             this.skillsLabel.TabIndex = 4;
@@ -87,7 +93,7 @@
             // phoneNumberLabel
             // 
             this.phoneNumberLabel.AutoSize = true;
-            this.phoneNumberLabel.Location = new System.Drawing.Point(12, 247);
+            this.phoneNumberLabel.Location = new System.Drawing.Point(6, 266);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
             this.phoneNumberLabel.Size = new System.Drawing.Size(101, 15);
             this.phoneNumberLabel.TabIndex = 5;
@@ -95,7 +101,7 @@
             // 
             // photoPictureBox
             // 
-            this.photoPictureBox.Location = new System.Drawing.Point(381, 29);
+            this.photoPictureBox.Location = new System.Drawing.Point(6, 22);
             this.photoPictureBox.Name = "photoPictureBox";
             this.photoPictureBox.Size = new System.Drawing.Size(288, 215);
             this.photoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -104,7 +110,7 @@
             // 
             // clearPhotoButton
             // 
-            this.clearPhotoButton.Location = new System.Drawing.Point(545, 262);
+            this.clearPhotoButton.Location = new System.Drawing.Point(170, 255);
             this.clearPhotoButton.Name = "clearPhotoButton";
             this.clearPhotoButton.Size = new System.Drawing.Size(87, 30);
             this.clearPhotoButton.TabIndex = 7;
@@ -114,7 +120,7 @@
             // 
             // browsePhotoButton
             // 
-            this.browsePhotoButton.Location = new System.Drawing.Point(418, 262);
+            this.browsePhotoButton.Location = new System.Drawing.Point(43, 255);
             this.browsePhotoButton.Name = "browsePhotoButton";
             this.browsePhotoButton.Size = new System.Drawing.Size(87, 30);
             this.browsePhotoButton.TabIndex = 8;
@@ -122,25 +128,68 @@
             this.browsePhotoButton.UseVisualStyleBackColor = true;
             this.browsePhotoButton.Click += new System.EventHandler(this.browsePhotoButton_Click);
             // 
+            // imageGroupBox
+            // 
+            this.imageGroupBox.Controls.Add(this.photoPictureBox);
+            this.imageGroupBox.Controls.Add(this.browsePhotoButton);
+            this.imageGroupBox.Controls.Add(this.clearPhotoButton);
+            this.imageGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.imageGroupBox.Name = "imageGroupBox";
+            this.imageGroupBox.Size = new System.Drawing.Size(300, 314);
+            this.imageGroupBox.TabIndex = 9;
+            this.imageGroupBox.TabStop = false;
+            this.imageGroupBox.Text = "Фото";
+            // 
+            // dataGroupBox
+            // 
+            this.dataGroupBox.Controls.Add(this.skillsListBox);
+            this.dataGroupBox.Controls.Add(this.phoneNumberTextBox);
+            this.dataGroupBox.Controls.Add(this.phoneNumberLabel);
+            this.dataGroupBox.Controls.Add(this.fullnameTextBox);
+            this.dataGroupBox.Controls.Add(this.skillsLabel);
+            this.dataGroupBox.Controls.Add(this.fullnameLabel);
+            this.dataGroupBox.Location = new System.Drawing.Point(318, 12);
+            this.dataGroupBox.Name = "dataGroupBox";
+            this.dataGroupBox.Size = new System.Drawing.Size(364, 314);
+            this.dataGroupBox.TabIndex = 10;
+            this.dataGroupBox.TabStop = false;
+            this.dataGroupBox.Text = "Данные";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(526, 332);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Сохранить";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(607, 332);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 12;
+            this.cancelButton.Text = "Отмена";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
             // FormAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 304);
-            this.Controls.Add(this.browsePhotoButton);
-            this.Controls.Add(this.clearPhotoButton);
-            this.Controls.Add(this.photoPictureBox);
-            this.Controls.Add(this.phoneNumberLabel);
-            this.Controls.Add(this.skillsLabel);
-            this.Controls.Add(this.fullnameLabel);
-            this.Controls.Add(this.fullnameTextBox);
-            this.Controls.Add(this.skillsListBox);
-            this.Controls.Add(this.phoneNumberTextBox);
+            this.ClientSize = new System.Drawing.Size(692, 364);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.dataGroupBox);
+            this.Controls.Add(this.imageGroupBox);
             this.Name = "FormAddEmployee";
             this.Text = "FormAddEmployee";
             ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).EndInit();
+            this.imageGroupBox.ResumeLayout(false);
+            this.dataGroupBox.ResumeLayout(false);
+            this.dataGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -155,5 +204,9 @@
         private PictureBox photoPictureBox;
         private Button clearPhotoButton;
         private Button browsePhotoButton;
+        private GroupBox imageGroupBox;
+        private GroupBox dataGroupBox;
+        private Button saveButton;
+        private Button cancelButton;
     }
 }
