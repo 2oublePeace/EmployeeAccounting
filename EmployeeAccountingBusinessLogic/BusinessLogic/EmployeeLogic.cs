@@ -27,14 +27,14 @@ public class EmployeeLogic
 
     public void CreateOrUpdate(EmployeeBindingModel model)
     {
-        var element = _employeeStorage.GetElement
+        var employee = _employeeStorage.GetElement
         (
             new EmployeeBindingModel
             {
                 Fullname = model.Fullname
             }
         );
-        if (element != null && element.Id != model.Id)
+        if (employee != null && employee.Id != model.Id)
         {
             throw new Exception("Уже есть сотрудник с таким ФИО");
         }
@@ -48,10 +48,9 @@ public class EmployeeLogic
         }
     }
     public void Delete(EmployeeBindingModel model)
-
     {
-        var element = _employeeStorage.GetElement(new EmployeeBindingModel { Id = model.Id });
-        if (element == null)
+        var employee = _employeeStorage.GetElement(new EmployeeBindingModel { Id = model.Id });
+        if (employee == null)
         {
             throw new Exception("Сотрудник не найден");
         }

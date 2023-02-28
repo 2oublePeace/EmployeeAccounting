@@ -9,8 +9,8 @@ namespace EmployeeAccountingView
     {
         public override void Load()
         {
-            Bind<EmployeeLogic>().ToSelf();
             Bind<IEmployeeStorage>().To<EmployeeStorage>();
+            Bind<EmployeeLogic>().ToSelf();
         }
     }
 }

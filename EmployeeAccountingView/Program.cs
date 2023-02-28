@@ -15,10 +15,8 @@ namespace EmployeeAccountingView
         {
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-            var employeeStorage = kernel.Get<IEmployeeStorage>();
-            var employeeLogic = kernel.Get<EmployeeLogic>();
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormMain(employeeLogic));
+            Application.Run(new FormMain(kernel.Get<EmployeeLogic>()));
         }
     }
 }

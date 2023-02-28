@@ -36,7 +36,7 @@ public class EmployeeStorage : IEmployeeStorage
         using (var context = new EmployeeAccountingDatabaseContext())
         {
             return context.Employees
-            .Where(employee => employee.Fullname.Contains(model.Fullname))
+            .Where(employee => employee.Fullname == model.Fullname)
             .Select(employee => new EmployeeViewModel
             {
                 Id = employee.Id,
