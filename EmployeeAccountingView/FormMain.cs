@@ -74,7 +74,7 @@ namespace EmployeeAccountingView
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show("sfsdfs");
+            
         }
     }
 }
