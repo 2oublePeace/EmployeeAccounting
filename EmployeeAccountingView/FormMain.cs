@@ -60,7 +60,7 @@ namespace EmployeeAccountingView
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
 
-        private void ñîçäàòüÑîòğóäíèêàToolStripMenuItem_Click(object sender, EventArgs e)
+        private void createEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
            var form = _kernel.Get<FormAddEmployee>();
            form.ShowDialog();

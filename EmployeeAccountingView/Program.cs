@@ -1,9 +1,4 @@
-using EmployeeAccountingBusinessLogic.BusinessLogic;
-using EmployeeAccountingBusinessLogic.Interfaces;
 using Ninject;
-using Ninject.Modules;
-using System.Drawing.Design;
-using System.Reflection;
 
 namespace EmployeeAccountingView
 {

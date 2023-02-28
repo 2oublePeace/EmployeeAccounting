@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.employeeDataTable = new ControlsLibraryNet60.Data.ControlDataTableTable();
             this.controlDataTableMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.создатьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.создатьДокументToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.создатьДокументСТаблицойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.создатьДокументСДиграммойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlDataTableMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,51 +53,51 @@
             // controlDataTableMenuStrip
             // 
             this.controlDataTableMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.создатьСотрудникаToolStripMenuItem,
-            this.редактироватьСотрудникаToolStripMenuItem,
-            this.удалитьСотрудникаToolStripMenuItem,
-            this.создатьДокументToolStripMenuItem,
-            this.создатьДокументСТаблицойToolStripMenuItem,
-            this.создатьДокументСДиграммойToolStripMenuItem});
+            this.createEmployeeToolStripMenuItem,
+            this.editEmployeeToolStripMenuItem,
+            this.deleteEmployeeToolStripMenuItem,
+            this.createDocumentToolStripMenuItem,
+            this.createTableToolStripMenuItem,
+            this.createDiagramToolStripMenuItem});
             this.controlDataTableMenuStrip.Name = "controlDataTableMenuStrip";
-            this.controlDataTableMenuStrip.Size = new System.Drawing.Size(248, 158);
+            this.controlDataTableMenuStrip.Size = new System.Drawing.Size(221, 136);
             // 
-            // создатьСотрудникаToolStripMenuItem
+            // createEmployeeToolStripMenuItem
             // 
-            this.создатьСотрудникаToolStripMenuItem.Name = "создатьСотрудникаToolStripMenuItem";
-            this.создатьСотрудникаToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.создатьСотрудникаToolStripMenuItem.Text = "Создать сотрудника";
-            this.создатьСотрудникаToolStripMenuItem.Click += new System.EventHandler(this.создатьСотрудникаToolStripMenuItem_Click);
+            this.createEmployeeToolStripMenuItem.Name = "createEmployeeToolStripMenuItem";
+            this.createEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.createEmployeeToolStripMenuItem.Text = "Создать сотрудника";
+            this.createEmployeeToolStripMenuItem.Click += new System.EventHandler(this.createEmployeeToolStripMenuItem_Click);
             // 
-            // редактироватьСотрудникаToolStripMenuItem
+            // editEmployeeToolStripMenuItem
             // 
-            this.редактироватьСотрудникаToolStripMenuItem.Name = "редактироватьСотрудникаToolStripMenuItem";
-            this.редактироватьСотрудникаToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.редактироватьСотрудникаToolStripMenuItem.Text = "Редактировать сотрудника";
+            this.editEmployeeToolStripMenuItem.Name = "editEmployeeToolStripMenuItem";
+            this.editEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.editEmployeeToolStripMenuItem.Text = "Редактировать сотрудника";
             // 
-            // удалитьСотрудникаToolStripMenuItem
+            // deleteEmployeeToolStripMenuItem
             // 
-            this.удалитьСотрудникаToolStripMenuItem.Name = "удалитьСотрудникаToolStripMenuItem";
-            this.удалитьСотрудникаToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.удалитьСотрудникаToolStripMenuItem.Text = "Удалить сотрудника";
+            this.deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
+            this.deleteEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.deleteEmployeeToolStripMenuItem.Text = "Удалить сотрудника";
             // 
-            // создатьДокументToolStripMenuItem
+            // createDocumentToolStripMenuItem
             // 
-            this.создатьДокументToolStripMenuItem.Name = "создатьДокументToolStripMenuItem";
-            this.создатьДокументToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.создатьДокументToolStripMenuItem.Text = "Создать документ";
+            this.createDocumentToolStripMenuItem.Name = "createDocumentToolStripMenuItem";
+            this.createDocumentToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.createDocumentToolStripMenuItem.Text = "Создать документ";
             // 
-            // создатьДокументСТаблицойToolStripMenuItem
+            // createTableToolStripMenuItem
             // 
-            this.создатьДокументСТаблицойToolStripMenuItem.Name = "создатьДокументСТаблицойToolStripMenuItem";
-            this.создатьДокументСТаблицойToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.создатьДокументСТаблицойToolStripMenuItem.Text = "Создать документ с таблицей";
+            this.createTableToolStripMenuItem.Name = "createTableToolStripMenuItem";
+            this.createTableToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.createTableToolStripMenuItem.Text = "Создать таблицу";
             // 
-            // создатьДокументСДиграммойToolStripMenuItem
+            // createDiagramToolStripMenuItem
             // 
-            this.создатьДокументСДиграммойToolStripMenuItem.Name = "создатьДокументСДиграммойToolStripMenuItem";
-            this.создатьДокументСДиграммойToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.создатьДокументСДиграммойToolStripMenuItem.Text = "Создать документ с диграммой";
+            this.createDiagramToolStripMenuItem.Name = "createDiagramToolStripMenuItem";
+            this.createDiagramToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.createDiagramToolStripMenuItem.Text = "Создать диграмму";
             // 
             // FormMain
             // 
@@ -117,11 +117,11 @@
 
         private ControlsLibraryNet60.Data.ControlDataTableTable employeeDataTable;
         private ContextMenuStrip controlDataTableMenuStrip;
-        private ToolStripMenuItem создатьСотрудникаToolStripMenuItem;
-        private ToolStripMenuItem редактироватьСотрудникаToolStripMenuItem;
-        private ToolStripMenuItem удалитьСотрудникаToolStripMenuItem;
-        private ToolStripMenuItem создатьДокументToolStripMenuItem;
-        private ToolStripMenuItem создатьДокументСТаблицойToolStripMenuItem;
-        private ToolStripMenuItem создатьДокументСДиграммойToolStripMenuItem;
+        private ToolStripMenuItem createEmployeeToolStripMenuItem;
+        private ToolStripMenuItem editEmployeeToolStripMenuItem;
+        private ToolStripMenuItem deleteEmployeeToolStripMenuItem;
+        private ToolStripMenuItem createDocumentToolStripMenuItem;
+        private ToolStripMenuItem createTableToolStripMenuItem;
+        private ToolStripMenuItem createDiagramToolStripMenuItem;
     }
 }

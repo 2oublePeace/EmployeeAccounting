@@ -20,5 +20,21 @@ namespace EmployeeAccountingView
             InitializeComponent();
             _employeeLogic = employeeLogic;
         }
+
+        private void clearPhotoButton_Click(object sender, EventArgs e)
+        {
+            photoPictureBox.Image = null;
+        }
+
+        private void browsePhotoButton_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg"})
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    photoPictureBox.Image = Image.FromFile(dialog.FileName);
+                }
+            }
+        }
     }
 }
