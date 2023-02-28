@@ -1,17 +1,19 @@
 using ControlsLibraryNet60.Models;
+using DocumentFormat.OpenXml.Validation;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
-using System.Windows.Forms;
-
+using Ninject;
 
 namespace EmployeeAccountingView
 {
     public partial class FormMain : Form
     {
-        EmployeeLogic _employeeLogic;
+        private readonly StandardKernel _kernel;
+        private readonly EmployeeLogic _employeeLogic;
         public FormMain(EmployeeLogic employeeLogic)
         {
             InitializeComponent();
             _employeeLogic = employeeLogic;
+            _kernel = new StandardKernel(new Bindings());
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -56,6 +58,12 @@ namespace EmployeeAccountingView
             };
 
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
+        }
+
+        private void ÒÓÁ‰‡Ú¸—ÓÚÛ‰ÌËÍ‡ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           var form = _kernel.Get<FormAddEmployee>();
+           form.ShowDialog();
         }
     }
 }

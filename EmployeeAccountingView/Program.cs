@@ -1,6 +1,8 @@
 using EmployeeAccountingBusinessLogic.BusinessLogic;
 using EmployeeAccountingBusinessLogic.Interfaces;
 using Ninject;
+using Ninject.Modules;
+using System.Drawing.Design;
 using System.Reflection;
 
 namespace EmployeeAccountingView
@@ -13,10 +15,9 @@ namespace EmployeeAccountingView
         [STAThread]
         static void Main()
         {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
+            var kernel = new StandardKernel(new Bindings());
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormMain(kernel.Get<EmployeeLogic>()));
+            Application.Run(kernel.Get<FormMain>());
         }
     }
 }

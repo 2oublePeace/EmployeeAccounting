@@ -40,12 +40,12 @@
             this.controlDataTableMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // controlDataTable
+            // employeeDataTable
             // 
             this.employeeDataTable.ContextMenuStrip = this.controlDataTableMenuStrip;
             this.employeeDataTable.Location = new System.Drawing.Point(13, 12);
             this.employeeDataTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.employeeDataTable.Name = "controlDataTable";
+            this.employeeDataTable.Name = "employeeDataTable";
             this.employeeDataTable.SelectedRowIndex = -1;
             this.employeeDataTable.Size = new System.Drawing.Size(774, 426);
             this.employeeDataTable.TabIndex = 0;
@@ -59,13 +59,15 @@
             this.создатьДокументToolStripMenuItem,
             this.создатьДокументСТаблицойToolStripMenuItem,
             this.создатьДокументСДиграммойToolStripMenuItem});
-            this.controlDataTableMenuStrip.Size = new System.Drawing.Size(248, 136);
+            this.controlDataTableMenuStrip.Name = "controlDataTableMenuStrip";
+            this.controlDataTableMenuStrip.Size = new System.Drawing.Size(248, 158);
             // 
             // создатьСотрудникаToolStripMenuItem
             // 
             this.создатьСотрудникаToolStripMenuItem.Name = "создатьСотрудникаToolStripMenuItem";
             this.создатьСотрудникаToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.создатьСотрудникаToolStripMenuItem.Text = "Создать сотрудника";
+            this.создатьСотрудникаToolStripMenuItem.Click += new System.EventHandler(this.создатьСотрудникаToolStripMenuItem_Click);
             // 
             // редактироватьСотрудникаToolStripMenuItem
             // 
