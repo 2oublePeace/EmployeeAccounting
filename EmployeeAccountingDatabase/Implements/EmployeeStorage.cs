@@ -31,7 +31,7 @@ public class EmployeeStorage : IEmployeeStorage
     {
         if (model == null)
         {
-            return null;
+            throw new Exception("Ошибка при поиске записи сотрудников");
         }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
@@ -53,7 +53,7 @@ public class EmployeeStorage : IEmployeeStorage
     {
         if (model == null)
         {
-            return null;
+            throw new Exception("Ошибка при поиске записи сотрудника");
         }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
@@ -74,6 +74,10 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Insert(EmployeeBindingModel model)
     {
+        if (model == null)
+        {
+            throw new Exception("Ошибка при создании записи сотрудника");
+        }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
             context.Add(new Employee()
@@ -91,12 +95,16 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Update(EmployeeBindingModel model)
     {
+        if (model == null)
+        {
+            throw new Exception("Ошибка при обновлении записи сотрудника");
+        }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
             var employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id);
             if (employee == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Сотрудник не найден");
             }
             employee.Fullname = model.Fullname;
             employee.Photo = model.Photo;
@@ -108,6 +116,10 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Delete(EmployeeBindingModel model)
     {
+        if (model == null) 
+        {
+            throw new Exception("Ошибка при удалении записи сотрудника");
+        }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
             var employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id);

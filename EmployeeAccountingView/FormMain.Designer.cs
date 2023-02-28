@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.controlDataTable = new ControlsLibraryNet60.Data.ControlDataTableTable();
+            this.employeeDataTable = new ControlsLibraryNet60.Data.ControlDataTableTable();
             this.controlDataTableMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.создатьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,13 +42,13 @@
             // 
             // controlDataTable
             // 
-            this.controlDataTable.ContextMenuStrip = this.controlDataTableMenuStrip;
-            this.controlDataTable.Location = new System.Drawing.Point(13, 12);
-            this.controlDataTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.controlDataTable.Name = "controlDataTable";
-            this.controlDataTable.SelectedRowIndex = -1;
-            this.controlDataTable.Size = new System.Drawing.Size(774, 426);
-            this.controlDataTable.TabIndex = 0;
+            this.employeeDataTable.ContextMenuStrip = this.controlDataTableMenuStrip;
+            this.employeeDataTable.Location = new System.Drawing.Point(13, 12);
+            this.employeeDataTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.employeeDataTable.Name = "controlDataTable";
+            this.employeeDataTable.SelectedRowIndex = -1;
+            this.employeeDataTable.Size = new System.Drawing.Size(774, 426);
+            this.employeeDataTable.TabIndex = 0;
             // 
             // controlDataTableMenuStrip
             // 
@@ -102,7 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.controlDataTable);
+            this.Controls.Add(this.employeeDataTable);
             this.Name = "FormMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -113,7 +113,7 @@
 
         #endregion
 
-        private ControlsLibraryNet60.Data.ControlDataTableTable controlDataTable;
+        private ControlsLibraryNet60.Data.ControlDataTableTable employeeDataTable;
         private ContextMenuStrip controlDataTableMenuStrip;
         private ToolStripMenuItem создатьСотрудникаToolStripMenuItem;
         private ToolStripMenuItem редактироватьСотрудникаToolStripMenuItem;

@@ -1,5 +1,6 @@
 using ControlsLibraryNet60.Models;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
+using System.Windows.Forms;
 
 
 namespace EmployeeAccountingView
@@ -16,7 +17,8 @@ namespace EmployeeAccountingView
         private void FormMain_Load(object sender, EventArgs e)
         {
             InitializeTable();
-            controlDataTable.AddTable(_employeeLogic.Read(null));
+            employeeDataTable.AddTable(_employeeLogic.Read(null));
+             
         }
 
         public void InitializeTable()
@@ -53,7 +55,7 @@ namespace EmployeeAccountingView
                 }
             };
 
-            controlDataTable.LoadColumns(dataTableColumnConfigs);
+            employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
     }
 }
