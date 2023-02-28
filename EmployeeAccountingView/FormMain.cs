@@ -74,7 +74,31 @@ namespace EmployeeAccountingView
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (!e.Control)
+            {
+                return;
+            }
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                    MessageBox.Show("Hello!");
+                    break;
+                case Keys.U:
+                    MessageBox.Show("Hello!");
+                    break;
+                case Keys.D:
+                    MessageBox.Show("Hello!");
+                    break;
+                case Keys.S:
+                    MessageBox.Show("Hello!");
+                    break;
+                case Keys.T:
+                    MessageBox.Show("Hello!");
+                    break;
+                case Keys.C:
+                    MessageBox.Show("Hello!");
+                    break;
+            }
         }
     }
 }
