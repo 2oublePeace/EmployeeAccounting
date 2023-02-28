@@ -19,7 +19,8 @@ public class EmployeeStorage : IEmployeeStorage
                         Id = employee.Id,
                         Fullname = employee.Fullname,
                         Photo = employee.Photo,
-                        Skill = employee.Skill,
+                        SkillId = employee.SkillId,
+                        Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
                         PhoneNumber = employee.PhoneNumber
                     }
                 )
@@ -42,7 +43,8 @@ public class EmployeeStorage : IEmployeeStorage
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                Skill = employee.Skill,
+                SkillId = employee.SkillId,
+                Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
                 PhoneNumber = employee.PhoneNumber
             })
             .ToList();
@@ -65,7 +67,8 @@ public class EmployeeStorage : IEmployeeStorage
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                Skill = employee.Skill,
+                SkillId = employee.SkillId,
+                Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
                 PhoneNumber = employee.PhoneNumber
             } :
             null;
@@ -82,10 +85,10 @@ public class EmployeeStorage : IEmployeeStorage
         {
             context.Add(new Employee()
                 {
-                    Id = model.Id,
                     Fullname = model.Fullname,
                     Photo = model.Photo,
-                    Skill = model.Skill,
+                    SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName).Id,
+                    Skill = context.Skills.FirstOrDefault(skill => skill.Id == model.SkillId),
                     PhoneNumber = model.PhoneNumber
                 }
             );
@@ -108,7 +111,8 @@ public class EmployeeStorage : IEmployeeStorage
             }
             employee.Fullname = model.Fullname;
             employee.Photo = model.Photo;
-            employee.Skill = model.Skill;
+            employee.SkillId = model.SkillId;
+            employee.Skill = context.Skills.FirstOrDefault(skill => skill.Id == model.SkillId);
             employee.PhoneNumber = model.PhoneNumber;
             context.SaveChanges();
         }

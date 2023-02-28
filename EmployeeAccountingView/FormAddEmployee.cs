@@ -45,7 +45,7 @@ namespace EmployeeAccountingView
             _employeeLogic.CreateOrUpdate(new EmployeeBindingModel()
             {
                 Fullname = fullnameTextBox.Text,
-                Skill = GetEmployeeSkillValue(skillsListBox.SelectedElement),
+                SkillName = skillsListBox.SelectedElement,
                 Photo = ImageToByteArray(photoPictureBox.Image),
                 PhoneNumber = phoneNumberTextBox.Text
             });
@@ -53,18 +53,6 @@ namespace EmployeeAccountingView
             MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
-        }
-
-        private EmployeeSkill? GetEmployeeSkillValue(string selectedSkill)
-        {
-            foreach (var skill in Enum.GetValues<EmployeeSkill>())
-            {
-                if (selectedSkill == Enum.GetName(skill))
-                {
-                    return skill;
-                }
-            }
-            return null;
         }
 
         public static byte[] ImageToByteArray(Image image)
