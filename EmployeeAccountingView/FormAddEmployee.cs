@@ -36,16 +36,20 @@ namespace EmployeeAccountingView
                 MessageBox.Show("Заполните ФИО сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            /*if (string.IsNullOrEmpty(skillsListBox.SelectedElement))
+            if (string.IsNullOrEmpty(skillsListBox.SelectedElement))
             {
                 MessageBox.Show("Выберите навык сотрудника", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }*/
+            }
+     
             _employeeLogic.CreateOrUpdate(new EmployeeBindingModel()
             {
                 Fullname = fullnameTextBox.Text,
-
+                Skill = GetEmployeeSkillValue(skillsListBox.SelectedElement),
+                Photo = ImageToByteArray(photoPictureBox.Image),
+                PhoneNumber = phoneNumberTextBox.Text
             });
+
             MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
@@ -61,6 +65,12 @@ namespace EmployeeAccountingView
                 }
             }
             return null;
+        }
+
+        public static byte[] ImageToByteArray(Image image)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(image, typeof(byte[]));
         }
     }
 }
