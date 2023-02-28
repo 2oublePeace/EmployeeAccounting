@@ -1,6 +1,6 @@
 ﻿namespace EmployeeAccountingView
 {
-    partial class FormAddEmployee
+    partial class FormCreateOrUpdateEmployee
     {
         /// <summary>
         /// Required designer variable.

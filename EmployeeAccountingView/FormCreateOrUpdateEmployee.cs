@@ -1,18 +1,22 @@
 ﻿using EmployeeAccountingBusinessLogic.BindingModels;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
-using EmployeeAccountingBusinessLogic.Enums;
 
 namespace EmployeeAccountingView
 {
-    public partial class FormAddEmployee : Form
+    public partial class FormCreateOrUpdateEmployee : Form
     {
         EmployeeLogic _employeeLogic;
         SkillLogic _skillLogic;
-        public FormAddEmployee(EmployeeLogic employeeLogic, SkillLogic skillLogic)
+        public FormCreateOrUpdateEmployee(EmployeeLogic employeeLogic, SkillLogic skillLogic)
         {
             InitializeComponent();
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
+        }
+
+        private void FormAddEmployee_Load(object sender, EventArgs e)
+        {
+            skillsListBox.Items.AddRange(_skillLogic.Read(null).Select(skill => skill.Name).ToArray());
         }
 
         private void clearPhotoButton_Click(object sender, EventArgs e)
@@ -62,16 +66,13 @@ namespace EmployeeAccountingView
             Close();
         }
 
-        public static byte[] ImageToByteArray(Image image)
+        private static byte[] ImageToByteArray(Image image)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(image, typeof(byte[]));
+            return (byte[]) converter.ConvertTo(image, typeof(byte[]));
         }
 
-        private void FormAddEmployee_Load(object sender, EventArgs e)
-        {
-            skillsListBox.Items.AddRange(_skillLogic.Read(null).Select(skill => skill.Name).ToArray());
-        }
+        
 
         private void cancelButton_Click(object sender, EventArgs e)
         {

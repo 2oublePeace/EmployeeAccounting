@@ -67,7 +67,7 @@
             this.createEmployeeToolStripMenuItem.Name = "createEmployeeToolStripMenuItem";
             this.createEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.createEmployeeToolStripMenuItem.Text = "Создать сотрудника";
-            this.createEmployeeToolStripMenuItem.Click += new System.EventHandler(this.createEmployeeToolStripMenuItem_Click);
+            this.createEmployeeToolStripMenuItem.Click += new System.EventHandler(this.CreateEmployeeToolStripMenuItem_Click);
             // 
             // editEmployeeToolStripMenuItem
             // 

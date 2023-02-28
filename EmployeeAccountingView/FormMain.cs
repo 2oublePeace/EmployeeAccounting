@@ -1,5 +1,4 @@
 using ControlsLibraryNet60.Models;
-using DocumentFormat.OpenXml.Validation;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
 using Ninject;
 
@@ -22,9 +21,9 @@ namespace EmployeeAccountingView
             LoadData();
         }
 
-        private void createEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreateEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = _kernel.Get<FormAddEmployee>();
+            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
             form.ShowDialog();
             LoadData();
         }
