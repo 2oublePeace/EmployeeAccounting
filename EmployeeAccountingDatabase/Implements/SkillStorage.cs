@@ -34,7 +34,20 @@ namespace EmployeeAccountingDatabase.Implements
 
         public List<SkillViewModel> GetFullList()
         {
-            throw new NotImplementedException();
+            using (var context = new EmployeeAccountingDatabaseContext())
+            {
+                return context.Skills
+                    .Select
+                    (
+                        skill => new SkillViewModel
+                        {
+                            Id = skill.Id,
+                            Name = skill.Name,
+                            Value = skill.Value,
+                        }
+                    )
+                    .ToList();
+            }
         }
 
         public void Insert(SkillBindingModel model)

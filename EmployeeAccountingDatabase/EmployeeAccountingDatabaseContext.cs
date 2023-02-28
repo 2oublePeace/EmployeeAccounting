@@ -13,18 +13,15 @@ namespace EmployeeAccountingDatabase
             
             if (Database.EnsureCreated())
             {
-                using (var context = new EmployeeAccountingDatabaseContext())
+                foreach (var skill in Enum.GetValues<EmployeeSkill>())
                 {
-                    foreach (var skill in Enum.GetValues<EmployeeSkill>())
+                    Add(new Skill()
                     {
-                        context.Add(new Skill()
-                        {
-                            Name = Enum.GetName(skill),
-                            Value = skill
-                        });
-                    }
-                    context.SaveChanges();
-                } 
+                        Name = Enum.GetName(skill),
+                        Value = skill
+                    });
+                }
+                SaveChanges();       
             }
         }
 

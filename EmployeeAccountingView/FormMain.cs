@@ -19,8 +19,14 @@ namespace EmployeeAccountingView
         private void FormMain_Load(object sender, EventArgs e)
         {
             InitializeTable();
-            employeeDataTable.AddTable(_employeeLogic.Read(null));
-             
+            LoadData();
+        }
+
+        private void createEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = _kernel.Get<FormAddEmployee>();
+            form.ShowDialog();
+            LoadData();
         }
 
         public void InitializeTable()
@@ -60,10 +66,15 @@ namespace EmployeeAccountingView
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
 
-        private void createEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-           var form = _kernel.Get<FormAddEmployee>();
-           form.ShowDialog();
+            employeeDataTable.Clear();
+            employeeDataTable.AddTable(_employeeLogic.Read(null));
+        }
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("sfsdfs");
         }
     }
 }

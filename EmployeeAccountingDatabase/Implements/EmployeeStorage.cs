@@ -14,7 +14,7 @@ public class EmployeeStorage : IEmployeeStorage
             return context.Employees
                 .Select
                 (
-                    employee => new EmployeeViewModel()
+                    employee => new EmployeeViewModel
                     {
                         Id = employee.Id,
                         Fullname = employee.Fullname,
@@ -83,7 +83,7 @@ public class EmployeeStorage : IEmployeeStorage
         }
         using (var context = new EmployeeAccountingDatabaseContext())
         {
-            context.Add(new Employee()
+            context.Add(new Employee 
                 {
                     Fullname = model.Fullname,
                     Photo = model.Photo,

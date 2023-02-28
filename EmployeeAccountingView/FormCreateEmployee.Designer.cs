@@ -51,7 +51,7 @@
             this.phoneNumberTextBox.Location = new System.Drawing.Point(6, 284);
             this.phoneNumberTextBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.phoneNumberTextBox.Name = "phoneNumberTextBox";
-            this.phoneNumberTextBox.Pattern = "^((\\+7|8)+\\(\\d{4}\\))?\\d{0,2}-\\d{0,2}-\\d{0,2}$";
+            this.phoneNumberTextBox.Pattern = "^((\\+7|8)+\\-\\d{3})?\\d{0,2}-\\d{0,2}-\\d{0,2}$";
             this.phoneNumberTextBox.Size = new System.Drawing.Size(352, 23);
             this.phoneNumberTextBox.TabIndex = 0;
             this.phoneNumberTextBox.Value = "";
@@ -173,6 +173,7 @@
             this.cancelButton.TabIndex = 12;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // FormAddEmployee
             // 
@@ -184,7 +185,8 @@
             this.Controls.Add(this.dataGroupBox);
             this.Controls.Add(this.imageGroupBox);
             this.Name = "FormAddEmployee";
-            this.Text = "FormAddEmployee";
+            this.Text = "Создание сотрудника";
+            this.Load += new System.EventHandler(this.FormAddEmployee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).EndInit();
             this.imageGroupBox.ResumeLayout(false);
             this.dataGroupBox.ResumeLayout(false);

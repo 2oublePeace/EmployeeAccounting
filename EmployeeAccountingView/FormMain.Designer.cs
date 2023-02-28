@@ -106,8 +106,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.employeeDataTable);
             this.Name = "FormMain";
-            this.Text = "Form1";
+            this.Text = "Список сотрудников";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.controlDataTableMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
