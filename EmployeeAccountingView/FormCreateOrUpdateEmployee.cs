@@ -19,12 +19,12 @@ namespace EmployeeAccountingView
             skillsListBox.Items.AddRange(_skillLogic.Read(null).Select(skill => skill.Name).ToArray());
         }
 
-        private void clearPhotoButton_Click(object sender, EventArgs e)
+        private void ClearPhotoButton_Click(object sender, EventArgs e)
         {
             photoPictureBox.Image = null;
         }
 
-        private void browsePhotoButton_Click(object sender, EventArgs e)
+        private void BrowsePhotoButton_Click(object sender, EventArgs e)
         {
             using (var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg"})
             {
@@ -35,7 +35,7 @@ namespace EmployeeAccountingView
             }
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(fullnameTextBox.Text))
             {
@@ -66,18 +66,16 @@ namespace EmployeeAccountingView
             Close();
         }
 
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
         private static byte[] ImageToByteArray(Image image)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[]) converter.ConvertTo(image, typeof(byte[]));
-        }
-
-        
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
         }
     }
 }

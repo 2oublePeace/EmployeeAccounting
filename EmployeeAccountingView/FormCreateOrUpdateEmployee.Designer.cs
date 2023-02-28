@@ -116,7 +116,7 @@
             this.clearPhotoButton.TabIndex = 7;
             this.clearPhotoButton.Text = " Очистить";
             this.clearPhotoButton.UseVisualStyleBackColor = true;
-            this.clearPhotoButton.Click += new System.EventHandler(this.clearPhotoButton_Click);
+            this.clearPhotoButton.Click += new System.EventHandler(this.ClearPhotoButton_Click);
             // 
             // browsePhotoButton
             // 
@@ -126,7 +126,7 @@
             this.browsePhotoButton.TabIndex = 8;
             this.browsePhotoButton.Text = "Обзор";
             this.browsePhotoButton.UseVisualStyleBackColor = true;
-            this.browsePhotoButton.Click += new System.EventHandler(this.browsePhotoButton_Click);
+            this.browsePhotoButton.Click += new System.EventHandler(this.BrowsePhotoButton_Click);
             // 
             // imageGroupBox
             // 
@@ -163,7 +163,7 @@
             this.saveButton.TabIndex = 11;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // cancelButton
             // 
@@ -173,7 +173,7 @@
             this.cancelButton.TabIndex = 12;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // FormAddEmployee
             // 
