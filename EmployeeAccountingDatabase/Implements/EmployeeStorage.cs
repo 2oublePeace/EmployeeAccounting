@@ -2,6 +2,7 @@
 using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingBusinessLogic.ViewModels;
 using EmployeeAccountingDatabase.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EmployeeAccountingDatabase.Implements;
 
@@ -10,6 +11,7 @@ public class EmployeeStorage : IEmployeeStorage
     public List<EmployeeViewModel> GetFullList()
     {
         using (var context = new EmployeeAccountingDatabaseContext())
+        using (var memoryStream = new MemoryStream())
         {
             return context.Employees
                 .Select
@@ -88,7 +90,7 @@ public class EmployeeStorage : IEmployeeStorage
                     Fullname = model.Fullname,
                     Photo = model.Photo,
                     SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName).Id,
-                    Skill = context.Skills.FirstOrDefault(skill => skill.Id == model.SkillId),
+                    Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName),
                     PhoneNumber = model.PhoneNumber
                 }
             );
@@ -111,8 +113,8 @@ public class EmployeeStorage : IEmployeeStorage
             }
             employee.Fullname = model.Fullname;
             employee.Photo = model.Photo;
-            employee.SkillId = model.SkillId;
-            employee.Skill = context.Skills.FirstOrDefault(skill => skill.Id == model.SkillId);
+            employee.SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName).Id;
+            employee.Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName);
             employee.PhoneNumber = model.PhoneNumber;
             context.SaveChanges();
         }

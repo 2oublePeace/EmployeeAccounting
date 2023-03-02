@@ -1,3 +1,4 @@
+using EmployeeAccountingView.Utils;
 using Ninject;
 
 namespace EmployeeAccountingView

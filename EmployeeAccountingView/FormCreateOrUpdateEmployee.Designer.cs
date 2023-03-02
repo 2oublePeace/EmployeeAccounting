@@ -28,187 +28,247 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.phoneNumberTextBox = new ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber();
-            this.skillsListBox = new ControlsLibraryNet60.Selected.ControlSelectedListBoxProperty();
-            this.fullnameTextBox = new System.Windows.Forms.TextBox();
-            this.fullnameLabel = new System.Windows.Forms.Label();
-            this.skillsLabel = new System.Windows.Forms.Label();
-            this.phoneNumberLabel = new System.Windows.Forms.Label();
-            this.photoPictureBox = new System.Windows.Forms.PictureBox();
-            this.clearPhotoButton = new System.Windows.Forms.Button();
-            this.browsePhotoButton = new System.Windows.Forms.Button();
-            this.imageGroupBox = new System.Windows.Forms.GroupBox();
-            this.dataGroupBox = new System.Windows.Forms.GroupBox();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).BeginInit();
-            this.imageGroupBox.SuspendLayout();
-            this.dataGroupBox.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // phoneNumberTextBox
-            // 
-            this.phoneNumberTextBox.Location = new System.Drawing.Point(6, 284);
-            this.phoneNumberTextBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.phoneNumberTextBox.Name = "phoneNumberTextBox";
-            this.phoneNumberTextBox.Pattern = "^((\\+7|8)+\\-\\d{3})?\\d{0,2}-\\d{0,2}-\\d{0,2}$";
-            this.phoneNumberTextBox.Size = new System.Drawing.Size(352, 23);
-            this.phoneNumberTextBox.TabIndex = 0;
-            this.phoneNumberTextBox.Value = "";
-            // 
-            // skillsListBox
-            // 
-            this.skillsListBox.Location = new System.Drawing.Point(6, 90);
-            this.skillsListBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.skillsListBox.Name = "skillsListBox";
-            this.skillsListBox.SelectedElement = "";
-            this.skillsListBox.Size = new System.Drawing.Size(352, 173);
-            this.skillsListBox.TabIndex = 1;
-            // 
-            // fullnameTextBox
-            // 
-            this.fullnameTextBox.Location = new System.Drawing.Point(6, 46);
-            this.fullnameTextBox.Name = "fullnameTextBox";
-            this.fullnameTextBox.Size = new System.Drawing.Size(353, 23);
-            this.fullnameTextBox.TabIndex = 2;
-            // 
-            // fullnameLabel
-            // 
-            this.fullnameLabel.AutoSize = true;
-            this.fullnameLabel.Location = new System.Drawing.Point(6, 28);
-            this.fullnameLabel.Name = "fullnameLabel";
-            this.fullnameLabel.Size = new System.Drawing.Size(34, 15);
-            this.fullnameLabel.TabIndex = 3;
-            this.fullnameLabel.Text = "ФИО";
-            // 
-            // skillsLabel
-            // 
-            this.skillsLabel.AutoSize = true;
-            this.skillsLabel.Location = new System.Drawing.Point(6, 72);
-            this.skillsLabel.Name = "skillsLabel";
-            this.skillsLabel.Size = new System.Drawing.Size(50, 15);
-            this.skillsLabel.TabIndex = 4;
-            this.skillsLabel.Text = "Навыки";
-            // 
-            // phoneNumberLabel
-            // 
-            this.phoneNumberLabel.AutoSize = true;
-            this.phoneNumberLabel.Location = new System.Drawing.Point(6, 266);
-            this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(101, 15);
-            this.phoneNumberLabel.TabIndex = 5;
-            this.phoneNumberLabel.Text = "Номер телефона";
-            // 
-            // photoPictureBox
-            // 
-            this.photoPictureBox.Location = new System.Drawing.Point(6, 22);
-            this.photoPictureBox.Name = "photoPictureBox";
-            this.photoPictureBox.Size = new System.Drawing.Size(288, 215);
-            this.photoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.photoPictureBox.TabIndex = 6;
-            this.photoPictureBox.TabStop = false;
+            clearPhotoButton = new Button();
+            browsePhotoButton = new Button();
+            tableLayoutPanel = new TableLayoutPanel();
+            flowLayoutPanelImage = new FlowLayoutPanel();
+            dataGroupBox = new GroupBox();
+            skillsListBox = new ControlsLibraryNet60.Selected.ControlSelectedListBoxProperty();
+            phoneNumberTextBox = new ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber();
+            phoneNumberLabel = new Label();
+            fullnameTextBox = new TextBox();
+            skillsLabel = new Label();
+            fullnameLabel = new Label();
+            imageGroupBox = new GroupBox();
+            photoPictureBox = new PictureBox();
+            flowLayoutPanelData = new FlowLayoutPanel();
+            cancelButton = new Button();
+            saveButton = new Button();
+            tableLayoutPanel.SuspendLayout();
+            flowLayoutPanelImage.SuspendLayout();
+            dataGroupBox.SuspendLayout();
+            imageGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)photoPictureBox).BeginInit();
+            flowLayoutPanelData.SuspendLayout();
+            SuspendLayout();
             // 
             // clearPhotoButton
             // 
-            this.clearPhotoButton.Location = new System.Drawing.Point(170, 255);
-            this.clearPhotoButton.Name = "clearPhotoButton";
-            this.clearPhotoButton.Size = new System.Drawing.Size(87, 30);
-            this.clearPhotoButton.TabIndex = 7;
-            this.clearPhotoButton.Text = " Очистить";
-            this.clearPhotoButton.UseVisualStyleBackColor = true;
-            this.clearPhotoButton.Click += new System.EventHandler(this.ClearPhotoButton_Click);
+            clearPhotoButton.Location = new Point(28, 3);
+            clearPhotoButton.Name = "clearPhotoButton";
+            clearPhotoButton.Size = new Size(75, 23);
+            clearPhotoButton.TabIndex = 13;
+            clearPhotoButton.Text = "Очистить";
+            clearPhotoButton.UseVisualStyleBackColor = true;
+            clearPhotoButton.Click += ClearPhotoButton_Click;
             // 
             // browsePhotoButton
             // 
-            this.browsePhotoButton.Location = new System.Drawing.Point(43, 255);
-            this.browsePhotoButton.Name = "browsePhotoButton";
-            this.browsePhotoButton.Size = new System.Drawing.Size(87, 30);
-            this.browsePhotoButton.TabIndex = 8;
-            this.browsePhotoButton.Text = "Обзор";
-            this.browsePhotoButton.UseVisualStyleBackColor = true;
-            this.browsePhotoButton.Click += new System.EventHandler(this.BrowsePhotoButton_Click);
+            browsePhotoButton.Location = new Point(109, 3);
+            browsePhotoButton.Name = "browsePhotoButton";
+            browsePhotoButton.Size = new Size(75, 23);
+            browsePhotoButton.TabIndex = 12;
+            browsePhotoButton.Text = "Обзор";
+            browsePhotoButton.UseVisualStyleBackColor = true;
+            browsePhotoButton.Click += BrowsePhotoButton_Click;
             // 
-            // imageGroupBox
+            // tableLayoutPanel
             // 
-            this.imageGroupBox.Controls.Add(this.photoPictureBox);
-            this.imageGroupBox.Controls.Add(this.browsePhotoButton);
-            this.imageGroupBox.Controls.Add(this.clearPhotoButton);
-            this.imageGroupBox.Location = new System.Drawing.Point(12, 12);
-            this.imageGroupBox.Name = "imageGroupBox";
-            this.imageGroupBox.Size = new System.Drawing.Size(300, 314);
-            this.imageGroupBox.TabIndex = 9;
-            this.imageGroupBox.TabStop = false;
-            this.imageGroupBox.Text = "Фото";
+            tableLayoutPanel.ColumnCount = 2;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel.Controls.Add(flowLayoutPanelImage, 0, 1);
+            tableLayoutPanel.Controls.Add(dataGroupBox, 1, 0);
+            tableLayoutPanel.Controls.Add(imageGroupBox, 0, 0);
+            tableLayoutPanel.Controls.Add(flowLayoutPanelData, 0, 2);
+            tableLayoutPanel.Dock = DockStyle.Fill;
+            tableLayoutPanel.Location = new Point(10, 10);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = 3;
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 78.47175F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10.7641258F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10.7641258F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel.Size = new Size(387, 328);
+            tableLayoutPanel.TabIndex = 11;
+            // 
+            // flowLayoutPanelImage
+            // 
+            flowLayoutPanelImage.BackColor = SystemColors.Control;
+            flowLayoutPanelImage.Controls.Add(browsePhotoButton);
+            flowLayoutPanelImage.Controls.Add(clearPhotoButton);
+            flowLayoutPanelImage.Dock = DockStyle.Fill;
+            flowLayoutPanelImage.FlowDirection = FlowDirection.RightToLeft;
+            flowLayoutPanelImage.ForeColor = SystemColors.ControlText;
+            flowLayoutPanelImage.Location = new Point(3, 260);
+            flowLayoutPanelImage.Name = "flowLayoutPanelImage";
+            flowLayoutPanelImage.Size = new Size(187, 29);
+            flowLayoutPanelImage.TabIndex = 12;
             // 
             // dataGroupBox
             // 
-            this.dataGroupBox.Controls.Add(this.skillsListBox);
-            this.dataGroupBox.Controls.Add(this.phoneNumberTextBox);
-            this.dataGroupBox.Controls.Add(this.phoneNumberLabel);
-            this.dataGroupBox.Controls.Add(this.fullnameTextBox);
-            this.dataGroupBox.Controls.Add(this.skillsLabel);
-            this.dataGroupBox.Controls.Add(this.fullnameLabel);
-            this.dataGroupBox.Location = new System.Drawing.Point(318, 12);
-            this.dataGroupBox.Name = "dataGroupBox";
-            this.dataGroupBox.Size = new System.Drawing.Size(364, 314);
-            this.dataGroupBox.TabIndex = 10;
-            this.dataGroupBox.TabStop = false;
-            this.dataGroupBox.Text = "Данные";
+            dataGroupBox.Controls.Add(skillsListBox);
+            dataGroupBox.Controls.Add(phoneNumberTextBox);
+            dataGroupBox.Controls.Add(phoneNumberLabel);
+            dataGroupBox.Controls.Add(fullnameTextBox);
+            dataGroupBox.Controls.Add(skillsLabel);
+            dataGroupBox.Controls.Add(fullnameLabel);
+            dataGroupBox.Dock = DockStyle.Fill;
+            dataGroupBox.Location = new Point(196, 3);
+            dataGroupBox.Name = "dataGroupBox";
+            tableLayoutPanel.SetRowSpan(dataGroupBox, 2);
+            dataGroupBox.Size = new Size(188, 286);
+            dataGroupBox.TabIndex = 10;
+            dataGroupBox.TabStop = false;
+            dataGroupBox.Text = "Данные";
             // 
-            // saveButton
+            // skillsListBox
             // 
-            this.saveButton.Location = new System.Drawing.Point(526, 332);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Сохранить";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            skillsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            skillsListBox.Location = new Point(6, 81);
+            skillsListBox.Margin = new Padding(4, 3, 4, 3);
+            skillsListBox.Name = "skillsListBox";
+            skillsListBox.SelectedElement = "";
+            skillsListBox.Size = new Size(175, 155);
+            skillsListBox.TabIndex = 1;
+            // 
+            // phoneNumberTextBox
+            // 
+            phoneNumberTextBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            phoneNumberTextBox.Location = new Point(6, 257);
+            phoneNumberTextBox.Margin = new Padding(5, 3, 5, 3);
+            phoneNumberTextBox.Name = "phoneNumberTextBox";
+            phoneNumberTextBox.Pattern = "^((\\+7|8)+\\-\\d{3})?\\d{0,2}-\\d{0,2}-\\d{0,2}$";
+            phoneNumberTextBox.Size = new Size(176, 23);
+            phoneNumberTextBox.TabIndex = 0;
+            phoneNumberTextBox.Value = "";
+            // 
+            // phoneNumberLabel
+            // 
+            phoneNumberLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            phoneNumberLabel.AutoSize = true;
+            phoneNumberLabel.Location = new Point(6, 239);
+            phoneNumberLabel.Name = "phoneNumberLabel";
+            phoneNumberLabel.Size = new Size(101, 15);
+            phoneNumberLabel.TabIndex = 4;
+            phoneNumberLabel.Text = "Номер телефона";
+            // 
+            // fullnameTextBox
+            // 
+            fullnameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            fullnameTextBox.Location = new Point(6, 37);
+            fullnameTextBox.Name = "fullnameTextBox";
+            fullnameTextBox.Size = new Size(176, 23);
+            fullnameTextBox.TabIndex = 2;
+            // 
+            // skillsLabel
+            // 
+            skillsLabel.AutoSize = true;
+            skillsLabel.Location = new Point(6, 63);
+            skillsLabel.Name = "skillsLabel";
+            skillsLabel.Size = new Size(50, 15);
+            skillsLabel.TabIndex = 4;
+            skillsLabel.Text = "Навыки";
+            // 
+            // fullnameLabel
+            // 
+            fullnameLabel.AutoSize = true;
+            fullnameLabel.Location = new Point(6, 19);
+            fullnameLabel.Name = "fullnameLabel";
+            fullnameLabel.Size = new Size(34, 15);
+            fullnameLabel.TabIndex = 3;
+            fullnameLabel.Text = "ФИО";
+            // 
+            // imageGroupBox
+            // 
+            imageGroupBox.Controls.Add(photoPictureBox);
+            imageGroupBox.Dock = DockStyle.Fill;
+            imageGroupBox.Location = new Point(3, 3);
+            imageGroupBox.Name = "imageGroupBox";
+            imageGroupBox.Padding = new Padding(10);
+            imageGroupBox.Size = new Size(187, 251);
+            imageGroupBox.TabIndex = 9;
+            imageGroupBox.TabStop = false;
+            imageGroupBox.Text = "Фото";
+            // 
+            // photoPictureBox
+            // 
+            photoPictureBox.Dock = DockStyle.Fill;
+            photoPictureBox.Location = new Point(10, 26);
+            photoPictureBox.Name = "photoPictureBox";
+            photoPictureBox.Size = new Size(167, 215);
+            photoPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            photoPictureBox.TabIndex = 0;
+            photoPictureBox.TabStop = false;
+            // 
+            // flowLayoutPanelData
+            // 
+            tableLayoutPanel.SetColumnSpan(flowLayoutPanelData, 2);
+            flowLayoutPanelData.Controls.Add(cancelButton);
+            flowLayoutPanelData.Controls.Add(saveButton);
+            flowLayoutPanelData.Dock = DockStyle.Fill;
+            flowLayoutPanelData.FlowDirection = FlowDirection.RightToLeft;
+            flowLayoutPanelData.Location = new Point(3, 295);
+            flowLayoutPanelData.Name = "flowLayoutPanelData";
+            flowLayoutPanelData.Size = new Size(381, 30);
+            flowLayoutPanelData.TabIndex = 6;
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(607, 332);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 12;
-            this.cancelButton.Text = "Отмена";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            cancelButton.Location = new Point(303, 3);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(75, 23);
+            cancelButton.TabIndex = 12;
+            cancelButton.Text = "Отмена";
+            cancelButton.UseVisualStyleBackColor = true;
+            cancelButton.Click += CancelButton_Click;
             // 
-            // FormAddEmployee
+            // saveButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 364);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.dataGroupBox);
-            this.Controls.Add(this.imageGroupBox);
-            this.Name = "FormAddEmployee";
-            this.Text = "Создание сотрудника";
-            this.Load += new System.EventHandler(this.FormAddEmployee_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.photoPictureBox)).EndInit();
-            this.imageGroupBox.ResumeLayout(false);
-            this.dataGroupBox.ResumeLayout(false);
-            this.dataGroupBox.PerformLayout();
-            this.ResumeLayout(false);
-
+            saveButton.Location = new Point(222, 3);
+            saveButton.Name = "saveButton";
+            saveButton.Size = new Size(75, 23);
+            saveButton.TabIndex = 11;
+            saveButton.Text = "Сохранить";
+            saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButton_Click;
+            // 
+            // FormCreateOrUpdateEmployee
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(407, 348);
+            Controls.Add(tableLayoutPanel);
+            Name = "FormCreateOrUpdateEmployee";
+            Padding = new Padding(10);
+            Text = "Создание сотрудника";
+            Load += FormAddEmployee_Load;
+            tableLayoutPanel.ResumeLayout(false);
+            flowLayoutPanelImage.ResumeLayout(false);
+            dataGroupBox.ResumeLayout(false);
+            dataGroupBox.PerformLayout();
+            imageGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)photoPictureBox).EndInit();
+            flowLayoutPanelData.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber phoneNumberTextBox;
-        private ControlsLibraryNet60.Selected.ControlSelectedListBoxProperty skillsListBox;
-        private TextBox fullnameTextBox;
-        private Label fullnameLabel;
-        private Label skillsLabel;
-        private Label phoneNumberLabel;
-        private PictureBox photoPictureBox;
         private Button clearPhotoButton;
         private Button browsePhotoButton;
-        private GroupBox imageGroupBox;
-        private GroupBox dataGroupBox;
-        private Button saveButton;
+        private TableLayoutPanel tableLayoutPanel;
+        private FlowLayoutPanel flowLayoutPanelData;
         private Button cancelButton;
+        private Button saveButton;
+        private GroupBox dataGroupBox;
+        private ControlsLibraryNet60.Selected.ControlSelectedListBoxProperty skillsListBox;
+        private ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber phoneNumberTextBox;
+        private Label phoneNumberLabel;
+        private TextBox fullnameTextBox;
+        private Label skillsLabel;
+        private Label fullnameLabel;
+        private GroupBox imageGroupBox;
+        private FlowLayoutPanel flowLayoutPanelImage;
+        private PictureBox photoPictureBox;
     }
 }

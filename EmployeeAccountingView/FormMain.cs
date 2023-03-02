@@ -1,5 +1,12 @@
+using ComponentsLibraryNet60.DocumentWithTable;
+using ComponentsLibraryNet60.Models;
 using ControlsLibraryNet60.Models;
+using EmployeeAccountingBusinessLogic.BindingModels;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
+using EmployeeAccountingBusinessLogic.Enums;
+using EmployeeAccountingBusinessLogic.ViewModels;
+using EmployeeAccountingDatabase.Models;
+using EmployeeAccountingView.Utils;
 using Ninject;
 
 namespace EmployeeAccountingView
@@ -8,10 +15,12 @@ namespace EmployeeAccountingView
     {
         private readonly StandardKernel _kernel;
         private readonly EmployeeLogic _employeeLogic;
-        public FormMain(EmployeeLogic employeeLogic)
+        private readonly SkillLogic _skillLogic;
+        public FormMain(EmployeeLogic employeeLogic, SkillLogic skillLogic)
         {
             InitializeComponent();
             _employeeLogic = employeeLogic;
+            _skillLogic = skillLogic;
             _kernel = new StandardKernel(new Bindings());
         }
 
@@ -21,14 +30,40 @@ namespace EmployeeAccountingView
             LoadData();
         }
 
-        private void CreateEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreateEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => CreateEmployee();
+        private void EditEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => UpdateEmployee();
+        private void DeleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => DeleteEmployee();
+        private void CreateDocumentToolStripMenuItem_Click(object sender, EventArgs e) => CreateDocument();
+        private void createTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
+        private void createDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
-            form.ShowDialog();
-            LoadData();
+            switch (keyData)
+            {
+                case Keys.Control | Keys.A:
+                    CreateEmployee();
+                    return true;
+                case Keys.Control | Keys.U:
+                    UpdateEmployee();
+                    return true;
+                case Keys.Control | Keys.D:
+                    DeleteEmployee();
+                    return true;
+                case Keys.Control | Keys.S:
+                    CreateDocument();
+                    return true;
+                case Keys.Control | Keys.T:
+                    CreateTable();
+                    return true;
+                case Keys.Control | Keys.C:
+                    CreateDiagram();
+                    return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        public void InitializeTable()
+        private void InitializeTable()
         {
             List<DataTableColumnConfig> dataTableColumnConfigs = new List<DataTableColumnConfig>()
             {
@@ -61,7 +96,6 @@ namespace EmployeeAccountingView
                     Visible = true
                 }
             };
-
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
 
@@ -71,32 +105,136 @@ namespace EmployeeAccountingView
             employeeDataTable.AddTable(_employeeLogic.Read(null));
         }
 
-        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        private void CreateEmployee()
         {
-            if (!e.Control)
+            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
+            form.ShowDialog();
+            LoadData();
+        }
+
+        private void UpdateEmployee()
+        {
+            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
+            form.EmployeeId = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id;
+            form.ShowDialog();
+            LoadData();
+        }
+
+        private void DeleteEmployee()
+        {
+            var dialogResult = MessageBox.Show(
+                "Удаление сотрудника. Продолжить?",
+                "Предупреждение",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.OK)
             {
-                return;
+                _employeeLogic.Delete(new EmployeeBindingModel { Id = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id });
+                LoadData();
             }
-            switch (e.KeyCode)
+        }
+
+        private void CreateDocument()
+        {
+            List<byte[]> images = new();
+
+            using (var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg", Multiselect = true })
             {
-                case Keys.A:
-                    MessageBox.Show("Hello!");
-                    break;
-                case Keys.U:
-                    MessageBox.Show("Hello!");
-                    break;
-                case Keys.D:
-                    MessageBox.Show("Hello!");
-                    break;
-                case Keys.S:
-                    MessageBox.Show("Hello!");
-                    break;
-                case Keys.T:
-                    MessageBox.Show("Hello!");
-                    break;
-                case Keys.C:
-                    MessageBox.Show("Hello!");
-                    break;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    images.AddRange(
+                        dialog.FileNames
+                        .Select(image => File.ReadAllBytes(image))
+                        .Concat(_employeeLogic.Read(null)
+                            .Select(employee => employee.Photo)));
+                }
+            }
+
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    componentDocumentWithContextImageWord.CreateDoc(new ComponentDocumentWithContextImageConfig
+                    {
+                        FilePath = dialog.FileName,
+                        Header = "Изображения",
+                        Images = images
+                    });
+                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void CreateTable()
+        {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    componentDocumentWithTableHeaderRowPdf.CreateDoc(new ComponentDocumentWithTableHeaderDataConfig<EmployeeViewModel>
+                    {
+                        FilePath = dialog.FileName,
+                        Header = "Сотрудники",
+                        UseUnion = true,
+                        ColumnsRowsWidth = new List<(int, int)> { (7, 0), (20, 0), (20, 0), (15, 0) },
+                        ColumnUnion = new List<(int StartIndex, int Count)> { (2, 2) },
+                        Headers = new List<(int ColumnIndex, int RowIndex, string Header, string PropertyName)>
+                        {
+                            (0, 0, "Идент.", "Id"),
+                            (1, 0, "ФИО", "Fullname"),
+                            (2, 0, "Работа", ""),
+                            (2, 1, "Номер телефона", "PhoneNumber"),
+                            (3, 1, "Навык", "Skill"),
+                        },
+                        Data = _employeeLogic.Read(null)
+                    });
+                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void CreateDiagram()
+        {
+            using (var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    componentDocumentWithChartBarExcel.CreateDoc(new ComponentDocumentWithChartConfig
+                    {
+                        FilePath = dialog.FileName,
+                        Header = "Навыки сотрудников",
+                        ChartTitle = "Гистограмма навыков",
+                        LegendLocation = ComponentsLibraryNet60.Models.Location.Bottom,
+                        Data = new Dictionary<string, List<(int Date, double Value)>>
+                        {
+                            { 
+                                "Серия 1",
+                                _skillLogic
+                                .Read(null)
+                                .Select(skill => (
+                                    (int)skill.Value,
+                                    (double)_employeeLogic.Read(null).Count(employee => skill.Value == employee.Skill)))
+                                .ToList()
+                            }
+                        }
+                    });
+                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

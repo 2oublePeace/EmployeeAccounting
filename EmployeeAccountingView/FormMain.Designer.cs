@@ -28,90 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.employeeDataTable = new ControlsLibraryNet60.Data.ControlDataTableTable();
-            this.controlDataTableMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.createEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.controlDataTableMenuStrip.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            employeeDataTable = new ControlsLibraryNet60.Data.ControlDataTableTable();
+            controlDataTableMenuStrip = new ContextMenuStrip(components);
+            createEmployeeToolStripMenuItem = new ToolStripMenuItem();
+            editEmployeeToolStripMenuItem = new ToolStripMenuItem();
+            deleteEmployeeToolStripMenuItem = new ToolStripMenuItem();
+            createDocumentToolStripMenuItem = new ToolStripMenuItem();
+            createTableToolStripMenuItem = new ToolStripMenuItem();
+            createDiagramToolStripMenuItem = new ToolStripMenuItem();
+            componentDocumentWithContextImageWord = new ComponentsLibraryNet60.DocumentWithContext.ComponentDocumentWithContextImageWord(components);
+            componentDocumentWithTableHeaderRowPdf = new ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableHeaderRowPdf(components);
+            componentDocumentWithChartBarExcel = new ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarExcel(components);
+            controlDataTableMenuStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // employeeDataTable
             // 
-            this.employeeDataTable.ContextMenuStrip = this.controlDataTableMenuStrip;
-            this.employeeDataTable.Location = new System.Drawing.Point(13, 12);
-            this.employeeDataTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.employeeDataTable.Name = "employeeDataTable";
-            this.employeeDataTable.SelectedRowIndex = -1;
-            this.employeeDataTable.Size = new System.Drawing.Size(774, 426);
-            this.employeeDataTable.TabIndex = 0;
+            employeeDataTable.ContextMenuStrip = controlDataTableMenuStrip;
+            employeeDataTable.Dock = DockStyle.Fill;
+            employeeDataTable.Location = new Point(10, 10);
+            employeeDataTable.Margin = new Padding(4, 3, 4, 3);
+            employeeDataTable.Name = "employeeDataTable";
+            employeeDataTable.SelectedRowIndex = -1;
+            employeeDataTable.Size = new Size(780, 430);
+            employeeDataTable.TabIndex = 0;
             // 
             // controlDataTableMenuStrip
             // 
-            this.controlDataTableMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createEmployeeToolStripMenuItem,
-            this.editEmployeeToolStripMenuItem,
-            this.deleteEmployeeToolStripMenuItem,
-            this.createDocumentToolStripMenuItem,
-            this.createTableToolStripMenuItem,
-            this.createDiagramToolStripMenuItem});
-            this.controlDataTableMenuStrip.Name = "controlDataTableMenuStrip";
-            this.controlDataTableMenuStrip.Size = new System.Drawing.Size(221, 136);
+            controlDataTableMenuStrip.Items.AddRange(new ToolStripItem[] { createEmployeeToolStripMenuItem, editEmployeeToolStripMenuItem, deleteEmployeeToolStripMenuItem, createDocumentToolStripMenuItem, createTableToolStripMenuItem, createDiagramToolStripMenuItem });
+            controlDataTableMenuStrip.Name = "controlDataTableMenuStrip";
+            controlDataTableMenuStrip.Size = new Size(221, 136);
             // 
             // createEmployeeToolStripMenuItem
             // 
-            this.createEmployeeToolStripMenuItem.Name = "createEmployeeToolStripMenuItem";
-            this.createEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.createEmployeeToolStripMenuItem.Text = "Создать сотрудника";
-            this.createEmployeeToolStripMenuItem.Click += new System.EventHandler(this.CreateEmployeeToolStripMenuItem_Click);
+            createEmployeeToolStripMenuItem.Name = "createEmployeeToolStripMenuItem";
+            createEmployeeToolStripMenuItem.Size = new Size(220, 22);
+            createEmployeeToolStripMenuItem.Text = "Создать сотрудника";
+            createEmployeeToolStripMenuItem.Click += CreateEmployeeToolStripMenuItem_Click;
             // 
             // editEmployeeToolStripMenuItem
             // 
-            this.editEmployeeToolStripMenuItem.Name = "editEmployeeToolStripMenuItem";
-            this.editEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.editEmployeeToolStripMenuItem.Text = "Редактировать сотрудника";
+            editEmployeeToolStripMenuItem.Name = "editEmployeeToolStripMenuItem";
+            editEmployeeToolStripMenuItem.Size = new Size(220, 22);
+            editEmployeeToolStripMenuItem.Text = "Редактировать сотрудника";
+            editEmployeeToolStripMenuItem.Click += EditEmployeeToolStripMenuItem_Click;
             // 
             // deleteEmployeeToolStripMenuItem
             // 
-            this.deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
-            this.deleteEmployeeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.deleteEmployeeToolStripMenuItem.Text = "Удалить сотрудника";
+            deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
+            deleteEmployeeToolStripMenuItem.Size = new Size(220, 22);
+            deleteEmployeeToolStripMenuItem.Text = "Удалить сотрудника";
+            deleteEmployeeToolStripMenuItem.Click += DeleteEmployeeToolStripMenuItem_Click;
             // 
             // createDocumentToolStripMenuItem
             // 
-            this.createDocumentToolStripMenuItem.Name = "createDocumentToolStripMenuItem";
-            this.createDocumentToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.createDocumentToolStripMenuItem.Text = "Создать документ";
+            createDocumentToolStripMenuItem.Name = "createDocumentToolStripMenuItem";
+            createDocumentToolStripMenuItem.Size = new Size(220, 22);
+            createDocumentToolStripMenuItem.Text = "Создать документ";
+            createDocumentToolStripMenuItem.Click += CreateDocumentToolStripMenuItem_Click;
             // 
             // createTableToolStripMenuItem
             // 
-            this.createTableToolStripMenuItem.Name = "createTableToolStripMenuItem";
-            this.createTableToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.createTableToolStripMenuItem.Text = "Создать таблицу";
+            createTableToolStripMenuItem.Name = "createTableToolStripMenuItem";
+            createTableToolStripMenuItem.Size = new Size(220, 22);
+            createTableToolStripMenuItem.Text = "Создать таблицу";
+            createTableToolStripMenuItem.Click += createTableToolStripMenuItem_Click;
             // 
             // createDiagramToolStripMenuItem
             // 
-            this.createDiagramToolStripMenuItem.Name = "createDiagramToolStripMenuItem";
-            this.createDiagramToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.createDiagramToolStripMenuItem.Text = "Создать диграмму";
+            createDiagramToolStripMenuItem.Name = "createDiagramToolStripMenuItem";
+            createDiagramToolStripMenuItem.Size = new Size(220, 22);
+            createDiagramToolStripMenuItem.Text = "Создать диграмму";
+            createDiagramToolStripMenuItem.Click += createDiagramToolStripMenuItem_Click;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.employeeDataTable);
-            this.Name = "FormMain";
-            this.Text = "Список сотрудников";
-            this.Load += new System.EventHandler(this.FormMain_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
-            this.controlDataTableMenuStrip.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(employeeDataTable);
+            Name = "FormMain";
+            Padding = new Padding(10);
+            Text = "Список сотрудников";
+            Load += FormMain_Load;
+            controlDataTableMenuStrip.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -124,5 +126,8 @@
         private ToolStripMenuItem createDocumentToolStripMenuItem;
         private ToolStripMenuItem createTableToolStripMenuItem;
         private ToolStripMenuItem createDiagramToolStripMenuItem;
+        private ComponentsLibraryNet60.DocumentWithContext.ComponentDocumentWithContextImageWord componentDocumentWithContextImageWord;
+        private ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableHeaderRowPdf componentDocumentWithTableHeaderRowPdf;
+        private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarExcel componentDocumentWithChartBarExcel;
     }
 }

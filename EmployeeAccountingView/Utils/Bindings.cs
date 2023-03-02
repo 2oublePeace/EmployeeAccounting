@@ -2,7 +2,7 @@
 using EmployeeAccountingDatabase.Implements;
 using Ninject.Modules;
 
-namespace EmployeeAccountingView
+namespace EmployeeAccountingView.Utils
 {
     public class Bindings : NinjectModule
     {
