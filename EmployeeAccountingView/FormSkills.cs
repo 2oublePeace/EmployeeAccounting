@@ -47,7 +47,7 @@ namespace EmployeeAccountingView
         private void DeleteSelectedRowOrSkill()
         {
             var dialogResult = MessageBox.Show(
-               "Удаление сотрудника. Продолжить?",
+               "Удаление навыка. Продолжить?",
                "Предупреждение",
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning);
@@ -76,7 +76,7 @@ namespace EmployeeAccountingView
                     Name = (string)skillDataGridView.CurrentRow.Cells[1].Value
                 });
             }
-            LoadData();
+            skillDataGridView.UpdateCellValue(1, skillDataGridView.CurrentRow.Index);
         }
     }
 }
