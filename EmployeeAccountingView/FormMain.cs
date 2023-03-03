@@ -34,8 +34,8 @@ namespace EmployeeAccountingView
         private void EditEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => UpdateEmployee();
         private void DeleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => DeleteEmployee();
         private void CreateDocumentToolStripMenuItem_Click(object sender, EventArgs e) => CreateDocument();
-        private void createTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
-        private void createDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
+        private void CreateTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
+        private void CreateDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -58,6 +58,9 @@ namespace EmployeeAccountingView
                     return true;
                 case Keys.Control | Keys.C:
                     CreateDiagram();
+                    return true;
+                case Keys.Control | Keys.O:
+                    OpenSkills();
                     return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -236,6 +239,12 @@ namespace EmployeeAccountingView
                     MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void OpenSkills()
+        {
+            var form = _kernel.Get<FormSkills>();
+            form.ShowDialog();
         }
     }
 }

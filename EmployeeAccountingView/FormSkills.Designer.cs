@@ -28,32 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            controlPhoneNumber = new ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber();
+            skillDataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)skillDataGridView).BeginInit();
             SuspendLayout();
             // 
-            // controlPhoneNumber
+            // skillDataGridView
             // 
-            controlPhoneNumber.Location = new Point(392, 269);
-            controlPhoneNumber.Margin = new Padding(5, 3, 5, 3);
-            controlPhoneNumber.Name = "controlPhoneNumber";
-            controlPhoneNumber.Pattern = "^(8)-(\\d{3})-(\\d{2})-(\\d{2})$";
-            controlPhoneNumber.Size = new Size(350, 23);
-            controlPhoneNumber.TabIndex = 0;
-            controlPhoneNumber.Value = "";
+            skillDataGridView.AllowUserToAddRows = false;
+            skillDataGridView.AllowUserToDeleteRows = false;
+            skillDataGridView.BackgroundColor = SystemColors.Window;
+            skillDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            skillDataGridView.Dock = DockStyle.Fill;
+            skillDataGridView.Location = new Point(10, 10);
+            skillDataGridView.Name = "skillDataGridView";
+            skillDataGridView.RowTemplate.Height = 25;
+            skillDataGridView.Size = new Size(780, 430);
+            skillDataGridView.TabIndex = 0;
+            skillDataGridView.CellEndEdit += SkillDataGridView_CellEndEdit;
             // 
             // FormSkills
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(controlPhoneNumber);
+            Controls.Add(skillDataGridView);
             Name = "FormSkills";
+            Padding = new Padding(10);
             Text = "FormSkills";
+            Load += FormSkills_Load;
+            ((System.ComponentModel.ISupportInitialize)skillDataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private ControlsLibraryNet60.Input.ControlInputRegexPhoneNumber controlPhoneNumber;
+        private DataGridView skillDataGridView;
     }
 }
