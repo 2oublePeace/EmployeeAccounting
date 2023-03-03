@@ -2,7 +2,6 @@
 using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingBusinessLogic.ViewModels;
 using EmployeeAccountingDatabase.Models;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EmployeeAccountingDatabase.Implements;
 
@@ -11,7 +10,6 @@ public class EmployeeStorage : IEmployeeStorage
     public List<EmployeeViewModel> GetFullList()
     {
         using (var context = new EmployeeAccountingDatabaseContext())
-        using (var memoryStream = new MemoryStream())
         {
             return context.Employees
                 .Select
@@ -34,7 +32,7 @@ public class EmployeeStorage : IEmployeeStorage
     {
         if (model == null)
         {
-            throw new Exception("Ошибка при поиске записи сотрудников");
+            throw new Exception("Ошибка при поиске записей сотрудников");
         }
         using (var context = new EmployeeAccountingDatabaseContext())
         {

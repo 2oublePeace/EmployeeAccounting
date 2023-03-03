@@ -93,14 +93,14 @@
             createTableToolStripMenuItem.Name = "createTableToolStripMenuItem";
             createTableToolStripMenuItem.Size = new Size(220, 22);
             createTableToolStripMenuItem.Text = "Создать таблицу";
-            createTableToolStripMenuItem.Click += createTableToolStripMenuItem_Click;
+            createTableToolStripMenuItem.Click += CreateTableToolStripMenuItem_Click;
             // 
             // createDiagramToolStripMenuItem
             // 
             createDiagramToolStripMenuItem.Name = "createDiagramToolStripMenuItem";
             createDiagramToolStripMenuItem.Size = new Size(220, 22);
             createDiagramToolStripMenuItem.Text = "Создать диграмму";
-            createDiagramToolStripMenuItem.Click += createDiagramToolStripMenuItem_Click;
+            createDiagramToolStripMenuItem.Click += CreateDiagramToolStripMenuItem_Click;
             // 
             // FormMain
             // 

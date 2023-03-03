@@ -1,6 +1,8 @@
 ﻿using EmployeeAccountingBusinessLogic.BindingModels;
 using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingBusinessLogic.ViewModels;
+using EmployeeAccountingDatabase.Models;
+using System.Xml.Linq;
 
 namespace EmployeeAccountingDatabase.Implements
 {
@@ -29,7 +31,22 @@ namespace EmployeeAccountingDatabase.Implements
 
         public List<SkillViewModel> GetFilteredList(SkillBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                throw new Exception("Ошибка при поиске записей навыков");
+            }
+            using (var context = new EmployeeAccountingDatabaseContext())
+            {
+                return context.Skills
+                .Where(skill => skill.Name == model.Name)
+                .Select(skill => new SkillViewModel
+                {
+                    Id = skill.Id,
+                    Name = skill.Name,
+                    Value = skill.Value
+                })
+                .ToList();
+            }
         }
 
         public List<SkillViewModel> GetFullList()
@@ -52,17 +69,62 @@ namespace EmployeeAccountingDatabase.Implements
 
         public void Insert(SkillBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                throw new Exception("Ошибка при создании записи навыка");
+            }
+            using (var context = new EmployeeAccountingDatabaseContext())
+            {
+                context.Add(new Skill
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Value = model.Value
+                }
+                );
+                context.SaveChanges();
+            }
         }
 
         public void Update(SkillBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                throw new Exception("Ошибка при обновлении записи навыка");
+            }
+            using (var context = new EmployeeAccountingDatabaseContext())
+            {
+                var skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id);
+                if (skill == null)
+                {
+                    throw new Exception("Навык не найден");
+                }
+                skill.Id = model.Id;
+                skill.Name = model.Name;
+                skill.Value = model.Value;
+                context.SaveChanges();
+            }
         }
 
         public void Delete(SkillBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                throw new Exception("Ошибка при удалении записи навыка");
+            }
+            using (var context = new EmployeeAccountingDatabaseContext())
+            {
+                var skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id);
+                if (skill != null)
+                {
+                    context.Skills.Remove(skill);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Навык не найден");
+                }
+            }
         }
     }
 }
