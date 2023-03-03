@@ -19,7 +19,6 @@ public class EmployeeStorage : IEmployeeStorage
                         Id = employee.Id,
                         Fullname = employee.Fullname,
                         Photo = employee.Photo,
-                        SkillId = employee.SkillId,
                         SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                         PhoneNumber = employee.PhoneNumber
                     }
@@ -43,7 +42,6 @@ public class EmployeeStorage : IEmployeeStorage
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                SkillId = employee.SkillId,
                 SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                 PhoneNumber = employee.PhoneNumber
             })
@@ -67,7 +65,6 @@ public class EmployeeStorage : IEmployeeStorage
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                SkillId = employee.SkillId,
                 SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                 PhoneNumber = employee.PhoneNumber
             } :
@@ -88,7 +85,6 @@ public class EmployeeStorage : IEmployeeStorage
                     Fullname = model.Fullname,
                     Photo = model.Photo,
                     SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName).Id,
-                    Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName),
                     PhoneNumber = model.PhoneNumber
                 }
             );
@@ -112,7 +108,6 @@ public class EmployeeStorage : IEmployeeStorage
             employee.Fullname = model.Fullname;
             employee.Photo = model.Photo;
             employee.SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName).Id;
-            employee.Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName);
             employee.PhoneNumber = model.PhoneNumber;
             context.SaveChanges();
         }

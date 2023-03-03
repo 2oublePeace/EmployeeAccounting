@@ -72,11 +72,11 @@ namespace EmployeeAccountingView
             {
                 _skillLogic.CreateOrUpdate(new SkillBindingModel
                 {
-                    Id = (int)skillDataGridView.CurrentRow.Cells[0].Value,
+                    Id = (int?)skillDataGridView.CurrentRow.Cells[0].Value,
                     Name = (string)skillDataGridView.CurrentRow.Cells[1].Value
                 });
-                LoadData();
             }
+            LoadData();
         }
     }
 }

@@ -13,6 +13,5 @@ public class Employee
     public string? PhoneNumber { get; set; }
     [Required]
     public int? SkillId { get; set; }
-    [Required]
     public virtual Skill? Skill { get; set; }
 }

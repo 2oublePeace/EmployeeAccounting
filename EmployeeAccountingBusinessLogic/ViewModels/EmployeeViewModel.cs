@@ -8,7 +8,6 @@ public class EmployeeViewModel
     [DisplayName("ФИО")]
     public string? Fullname { get; set; }
     public byte[]? Photo { get; set; }
-    public int? SkillId { get; set; }
     [DisplayName("Навык")]
     public string? SkillName { get; set; }
     [DisplayName("Телефон")]

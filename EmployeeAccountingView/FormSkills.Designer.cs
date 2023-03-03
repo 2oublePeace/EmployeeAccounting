@@ -40,6 +40,7 @@
             skillDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             skillDataGridView.Dock = DockStyle.Fill;
             skillDataGridView.Location = new Point(10, 10);
+            skillDataGridView.MultiSelect = false;
             skillDataGridView.Name = "skillDataGridView";
             skillDataGridView.RowTemplate.Height = 25;
             skillDataGridView.Size = new Size(780, 430);
@@ -54,7 +55,7 @@
             Controls.Add(skillDataGridView);
             Name = "FormSkills";
             Padding = new Padding(10);
-            Text = "FormSkills";
+            Text = "Навыки";
             Load += FormSkills_Load;
             ((System.ComponentModel.ISupportInitialize)skillDataGridView).EndInit();
             ResumeLayout(false);
