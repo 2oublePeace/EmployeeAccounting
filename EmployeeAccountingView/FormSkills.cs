@@ -1,7 +1,6 @@
-﻿using EmployeeAccountingBusinessLogic.BindingModels;
-using EmployeeAccountingBusinessLogic.BusinessLogic;
-using EmployeeAccountingBusinessLogic.ViewModels;
-using System.ComponentModel;
+﻿using ControlsLibraryNet60.Core;
+using System.Reflection;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace EmployeeAccountingView
 {
@@ -45,38 +44,6 @@ namespace EmployeeAccountingView
             skillDataGridView.DataSource = new BindingList<SkillViewModel>(skills);
         }
 
-        private void DeleteSelectedRowOrSkill()
-        {
-            var dialogResult = MessageBox.Show(
-               "Удаление сотрудника. Продолжить?",
-               "Предупреждение",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning);
-
-            if (dialogResult == DialogResult.Yes)
-            {
-                if (skillDataGridView.CurrentRow.Cells[0].Value != null)
-                {
-                    _skillLogic.Delete(new SkillBindingModel { Id = (int)skillDataGridView.CurrentRow.Cells[0].Value });
-                    LoadData();
-                }
-                else
-                {
-                    skillDataGridView.Rows.Remove(skillDataGridView.CurrentRow);
-                }
-            }
-        }
-
-        private void SkillDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!string.IsNullOrEmpty((string)skillDataGridView.CurrentRow.Cells[1].Value))
-            {
-                _skillLogic.CreateOrUpdate(new SkillBindingModel
-                {
-                    Name = (string)skillDataGridView.CurrentRow.Cells[1].Value
-                });
-                LoadData();
-            }
-        }
+        
     }
 }
