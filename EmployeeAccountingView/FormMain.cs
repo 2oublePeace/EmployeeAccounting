@@ -243,6 +243,7 @@ namespace EmployeeAccountingView
         {
             var form = _kernel.Get<FormSkills>();
             form.ShowDialog();
+            LoadData();
         }
     }
 }
