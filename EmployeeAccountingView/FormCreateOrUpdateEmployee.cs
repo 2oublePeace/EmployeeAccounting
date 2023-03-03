@@ -103,7 +103,7 @@ namespace EmployeeAccountingView
                 {
                     fullnameTextBox.Text = employee.Fullname;
                     LoadPhoneNumberTextBox(phoneNumberTextBox, employee.PhoneNumber);
-                    skillsListBox.SelectedElement = employee.Skill.ToString();
+                    skillsListBox.SelectedElement = employee.SkillName.ToString();
                     photoPictureBox.Image = ByteArrayConverter.ByteArrayToImage(employee.Photo);
                 }
             }
@@ -133,7 +133,7 @@ namespace EmployeeAccountingView
             {
                 var employee = _employeeLogic.Read(new EmployeeBindingModel { Id = employeeId }).FirstOrDefault();
                 if (fullnameTextBox.Text != employee.Fullname ||
-                    skillsListBox.SelectedElement != employee.Skill.ToString() ||
+                    skillsListBox.SelectedElement != employee.SkillName.ToString() ||
                     phoneNumberTextBox.Value != employee.PhoneNumber ||
                     ByteArrayConverter.ImageToByteArray(photoPictureBox.Image).Equals(employee.Photo))
                 {

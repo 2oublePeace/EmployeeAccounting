@@ -22,8 +22,7 @@ namespace EmployeeAccountingDatabase.Implements
                 new SkillViewModel
                 {
                     Id = skill.Id,
-                    Name = skill.Name,
-                    Value = skill.Value
+                    Name = skill.Name
                 } :
                 null;
             }
@@ -42,8 +41,7 @@ namespace EmployeeAccountingDatabase.Implements
                 .Select(skill => new SkillViewModel
                 {
                     Id = skill.Id,
-                    Name = skill.Name,
-                    Value = skill.Value
+                    Name = skill.Name
                 })
                 .ToList();
             }
@@ -59,8 +57,7 @@ namespace EmployeeAccountingDatabase.Implements
                         skill => new SkillViewModel
                         {
                             Id = skill.Id,
-                            Name = skill.Name,
-                            Value = skill.Value,
+                            Name = skill.Name
                         }
                     )
                     .ToList();
@@ -78,8 +75,7 @@ namespace EmployeeAccountingDatabase.Implements
                 context.Add(new Skill
                 {
                     Id = model.Id,
-                    Name = model.Name,
-                    Value = model.Value
+                    Name = model.Name
                 }
                 );
                 context.SaveChanges();
@@ -101,7 +97,6 @@ namespace EmployeeAccountingDatabase.Implements
                 }
                 skill.Id = model.Id;
                 skill.Name = model.Name;
-                skill.Value = model.Value;
                 context.SaveChanges();
             }
         }

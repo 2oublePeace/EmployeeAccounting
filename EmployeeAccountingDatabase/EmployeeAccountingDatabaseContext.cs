@@ -1,5 +1,4 @@
-﻿using EmployeeAccountingBusinessLogic.Enums;
-using EmployeeAccountingDatabase.Models;
+﻿using EmployeeAccountingDatabase.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAccountingDatabase
@@ -9,21 +8,7 @@ namespace EmployeeAccountingDatabase
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Skill> Skills => Set<Skill>();
 
-        public EmployeeAccountingDatabaseContext() {
-            
-            if (Database.EnsureCreated())
-            {
-                foreach (var skill in Enum.GetValues<EmployeeSkill>())
-                {
-                    Add(new Skill()
-                    {
-                        Name = Enum.GetName(skill),
-                        Value = skill
-                    });
-                }
-                SaveChanges();       
-            }
-        }
+        public EmployeeAccountingDatabaseContext() => Database.EnsureCreated();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

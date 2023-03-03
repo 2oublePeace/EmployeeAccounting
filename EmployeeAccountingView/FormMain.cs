@@ -3,9 +3,7 @@ using ComponentsLibraryNet60.Models;
 using ControlsLibraryNet60.Models;
 using EmployeeAccountingBusinessLogic.BindingModels;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
-using EmployeeAccountingBusinessLogic.Enums;
 using EmployeeAccountingBusinessLogic.ViewModels;
-using EmployeeAccountingDatabase.Models;
 using EmployeeAccountingView.Utils;
 using Ninject;
 
@@ -87,7 +85,7 @@ namespace EmployeeAccountingView
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "Навык",
-                    PropertyName = "Skill",
+                    PropertyName = "SkillName",
                     Width = 257,
                     Visible = true
                 },
@@ -186,7 +184,7 @@ namespace EmployeeAccountingView
                         FilePath = dialog.FileName,
                         Header = "Сотрудники",
                         UseUnion = true,
-                        ColumnsRowsWidth = new List<(int, int)> { (7, 0), (20, 0), (20, 0), (15, 0) },
+                        ColumnsRowsWidth = new List<(int, int)> { (7, 0), (20, 0), (20, 0), (20, 0) },
                         ColumnUnion = new List<(int StartIndex, int Count)> { (2, 2) },
                         Headers = new List<(int ColumnIndex, int RowIndex, string Header, string PropertyName)>
                         {
@@ -194,7 +192,7 @@ namespace EmployeeAccountingView
                             (1, 0, "ФИО", "Fullname"),
                             (2, 0, "Работа", ""),
                             (2, 1, "Номер телефона", "PhoneNumber"),
-                            (3, 1, "Навык", "Skill"),
+                            (3, 1, "Навык", "SkillName"),
                         },
                         Data = _employeeLogic.Read(null)
                     });
@@ -221,13 +219,13 @@ namespace EmployeeAccountingView
                         LegendLocation = ComponentsLibraryNet60.Models.Location.Bottom,
                         Data = new Dictionary<string, List<(int Date, double Value)>>
                         {
-                            { 
+                            {
                                 "Серия 1",
                                 _skillLogic
                                 .Read(null)
                                 .Select(skill => (
-                                    (int)skill.Value,
-                                    (double)_employeeLogic.Read(null).Count(employee => skill.Value == employee.Skill)))
+                                    (int)skill.Id,
+                                    (double)_employeeLogic.Read(null).Count(employee => skill.Name == employee.SkillName)))
                                 .ToList()
                             }
                         }

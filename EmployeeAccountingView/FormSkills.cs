@@ -34,7 +34,6 @@ namespace EmployeeAccountingView
         {
             skillDataGridView.DataSource = new BindingList<SkillViewModel>(_skillLogic.Read(null));
             skillDataGridView.Columns[0].Visible = false;
-            skillDataGridView.Columns[2].Visible = false;
             skillDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 

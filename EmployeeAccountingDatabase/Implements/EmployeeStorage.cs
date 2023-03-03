@@ -20,7 +20,7 @@ public class EmployeeStorage : IEmployeeStorage
                         Fullname = employee.Fullname,
                         Photo = employee.Photo,
                         SkillId = employee.SkillId,
-                        Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
+                        SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                         PhoneNumber = employee.PhoneNumber
                     }
                 )
@@ -44,7 +44,7 @@ public class EmployeeStorage : IEmployeeStorage
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
                 SkillId = employee.SkillId,
-                Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
+                SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                 PhoneNumber = employee.PhoneNumber
             })
             .ToList();
@@ -68,7 +68,7 @@ public class EmployeeStorage : IEmployeeStorage
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
                 SkillId = employee.SkillId,
-                Skill = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Value,
+                SkillName = context.Skills.FirstOrDefault(skill => skill.Id == employee.SkillId).Name,
                 PhoneNumber = employee.PhoneNumber
             } :
             null;

@@ -1,6 +1,4 @@
-﻿using EmployeeAccountingBusinessLogic.Enums;
-
-namespace EmployeeAccountingBusinessLogic.BindingModels;
+﻿namespace EmployeeAccountingBusinessLogic.BindingModels;
 
 public class EmployeeBindingModel
 {

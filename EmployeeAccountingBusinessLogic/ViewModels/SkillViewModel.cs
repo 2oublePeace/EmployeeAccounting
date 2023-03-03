@@ -1,5 +1,4 @@
-﻿using EmployeeAccountingBusinessLogic.Enums;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace EmployeeAccountingBusinessLogic.ViewModels
 {
@@ -8,6 +7,5 @@ namespace EmployeeAccountingBusinessLogic.ViewModels
         public int? Id { get; set; }
         [DisplayName("Навык")]
         public string? Name { get; set; }
-        public EmployeeSkill Value { get; set; }
     }
 }
