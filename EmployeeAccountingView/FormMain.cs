@@ -113,10 +113,14 @@ namespace EmployeeAccountingView
 
         private void UpdateEmployee()
         {
-            var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
-            form.EmployeeId = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id;
-            form.ShowDialog();
-            LoadData();
+            var selectedEmployeeId = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id;
+            if (selectedEmployeeId != null)
+            {
+                var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
+                form.EmployeeId = selectedEmployeeId;
+                form.ShowDialog();
+                LoadData();
+            }
         }
 
         private void DeleteEmployee()
@@ -223,7 +227,8 @@ namespace EmployeeAccountingView
                                 .Read(null)
                                 .Select(skill => (
                                     (int)skill.Id,
-                                    (double)_employeeLogic.Read(null).Count(employee => skill.Name == employee.SkillName)))
+                                    (double)_employeeLogic.Read(null)
+                                    .Count(employee => skill.Name == employee.SkillName)))
                                 .ToList()
                             }
                         }
