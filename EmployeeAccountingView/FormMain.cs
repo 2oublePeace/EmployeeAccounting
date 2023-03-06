@@ -70,28 +70,28 @@ namespace EmployeeAccountingView
                 {
                     ColumnHeader = "Идентификатор",
                     PropertyName = "Id",
-                    Width = 257,
+                    Width = 259,
                     Visible = false
                 },
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "ФИО",
                     PropertyName = "Fullname",
-                    Width = 257,
+                    Width = 259,
                     Visible = true
                 },
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "Навык",
                     PropertyName = "SkillName",
-                    Width = 257,
+                    Width = 259,
                     Visible = true
                 },
                 new DataTableColumnConfig()
                 {
                     ColumnHeader = "Номер телефона",
                     PropertyName = "PhoneNumber",
-                    Width = 257,
+                    Width = 259,
                     Visible = true
                 }
             };
