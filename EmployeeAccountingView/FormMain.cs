@@ -11,7 +11,6 @@ namespace EmployeeAccountingView
 {
     public partial class FormMain : Form
     {
-        private readonly StandardKernel _kernel;
         private readonly EmployeeLogic _employeeLogic;
         private readonly SkillLogic _skillLogic;
         public FormMain(EmployeeLogic employeeLogic, SkillLogic skillLogic)
@@ -19,7 +18,6 @@ namespace EmployeeAccountingView
             InitializeComponent();
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
-            _kernel = new StandardKernel(new Bindings());
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -108,14 +106,14 @@ namespace EmployeeAccountingView
 
         private void CreateEmployee()
         {
-            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
+            var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
             form.ShowDialog();
             LoadData();
         }
 
         private void UpdateEmployee()
         {
-            var form = _kernel.Get<FormCreateOrUpdateEmployee>();
+            var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
             form.EmployeeId = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id;
             form.ShowDialog();
             LoadData();
@@ -241,7 +239,7 @@ namespace EmployeeAccountingView
 
         private void OpenSkills()
         {
-            var form = _kernel.Get<FormSkills>();
+            var form = NinjectKernel.GetInstance().Get<FormSkills>();
             form.ShowDialog();
             LoadData();
         }
