@@ -1,6 +1,7 @@
 ﻿using ControlsLibraryNet60.Core;
 using EmployeeAccountingBusinessLogic.BindingModels;
 using EmployeeAccountingBusinessLogic.BusinessLogic;
+using EmployeeAccountingBusinessLogic.ViewModels;
 using EmployeeAccountingView.Utils;
 using System.Reflection;
 
@@ -17,28 +18,22 @@ namespace EmployeeAccountingView
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
         }
-
         private void FormAddEmployee_Load(object sender, EventArgs e)
         {
             LoadData();
         }
-
         private void BrowsePhotoButton_Click(object sender, EventArgs e)
         {
-            using (var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg" })
+            using var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg" };
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    photoPictureBox.Image = Image.FromFile(dialog.FileName);
-                }
+                photoPictureBox.Image = Image.FromFile(dialog.FileName);
             }
         }
-
         private void ClearPhotoButton_Click(object sender, EventArgs e)
         {
             photoPictureBox.Image = null;
         }
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(fullnameTextBox.Text))
@@ -70,7 +65,6 @@ namespace EmployeeAccountingView
             DialogResult = DialogResult.OK;
             Close();
         }
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             if (IsElementValuesChanged(EmployeeId))
@@ -92,31 +86,39 @@ namespace EmployeeAccountingView
                 Close();
             }
         }
-
         private void LoadData()
         {
-            skillsListBox.Items.AddRange(_skillLogic.Read(null).Select(skill => skill.Name).ToArray());
+            skillsListBox.Items.AddRange(_skillLogic
+                .Read(null)
+                .Select(skill => skill.Name ?? throw new Exception("Не найдено имя навыка"))
+                .ToArray());
+
             if (EmployeeId != null)
             {
-                var employee = _employeeLogic.Read(new EmployeeBindingModel { Id = EmployeeId }).FirstOrDefault();
-                if (employee != null)
-                {
-                    fullnameTextBox.Text = employee.Fullname;
-                    LoadPhoneNumberTextBox(phoneNumberTextBox, employee.PhoneNumber);
-                    skillsListBox.SelectedElement = employee.SkillName.ToString();
-                    photoPictureBox.Image = ByteArrayConverter.ByteArrayToImage(employee.Photo);
-                }
+                EmployeeViewModel employee = _employeeLogic
+                    .Read(new EmployeeBindingModel { 
+                        Id = EmployeeId })
+                    .FirstOrDefault() ??
+                        throw new Exception("Не найден сотрудник");
+                
+                fullnameTextBox.Text = employee.Fullname;
+                LoadPhoneNumberTextBox(phoneNumberTextBox, employee.PhoneNumber ?? 
+                    throw new Exception("Не найден номер телефона сотрудника"));
+                skillsListBox.SelectedElement = employee.SkillName ?? 
+                    throw new Exception("Не найдено имя навыка");
+                photoPictureBox.Image = ByteArrayConverter.ByteArrayToImage(employee.Photo ?? 
+                    throw new Exception("Не найдено фото сотрудника"));
             }
         }
-
-        private void LoadPhoneNumberTextBox(ControlInputRegex controlInputRegex, string phoneNumber)
+        private static void LoadPhoneNumberTextBox(ControlInputRegex controlInputRegex, string phoneNumber)
         {
             Type type = typeof(ControlInputRegex);
-            FieldInfo fieldInfo = type.GetField("textBoxInput", BindingFlags.Instance | BindingFlags.NonPublic);
-            TextBox textBox = (TextBox)fieldInfo.GetValue(controlInputRegex);
+            FieldInfo fieldInfo = type.GetField("textBoxInput", BindingFlags.Instance | BindingFlags.NonPublic) ?? 
+                throw new Exception("Поле не найдено");
+            TextBox textBox = (TextBox?)fieldInfo.GetValue(controlInputRegex) ?? 
+                throw new Exception("Текстовое поле имеет значение null");
             textBox.Text = phoneNumber;
         }
-
         private bool IsElementValuesChanged(int? employeeId)
         {
             if (employeeId == null)
@@ -131,9 +133,13 @@ namespace EmployeeAccountingView
             }
             else
             {
-                var employee = _employeeLogic.Read(new EmployeeBindingModel { Id = employeeId }).FirstOrDefault();
+                EmployeeViewModel employee = _employeeLogic
+                    .Read(new EmployeeBindingModel { Id = employeeId })
+                    .FirstOrDefault() ??
+                        throw new Exception("Сотрудник не найден");
+
                 if (fullnameTextBox.Text != employee.Fullname ||
-                    skillsListBox.SelectedElement != employee.SkillName.ToString() ||
+                    skillsListBox.SelectedElement != employee.SkillName ||
                     phoneNumberTextBox.Value != employee.PhoneNumber ||
                     ByteArrayConverter.ImageToByteArray(photoPictureBox.Image).Equals(employee.Photo))
                 {

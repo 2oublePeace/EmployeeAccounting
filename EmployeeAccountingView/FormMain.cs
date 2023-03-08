@@ -20,12 +20,10 @@ namespace EmployeeAccountingView
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
         }
-
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
         }
-
         private void CreateEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => CreateEmployee();
         private void EditEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => UpdateEmployee();
         private void DeleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => DeleteEmployee();
@@ -33,7 +31,6 @@ namespace EmployeeAccountingView
         private void CreateTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
         private void CreateDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
         private void SkillsToolStripMenuItem_Click(object sender, EventArgs e) => OpenFormSkills();
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -62,10 +59,9 @@ namespace EmployeeAccountingView
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
         private void InitializeTable()
         {
-            List<DataTableColumnConfig> dataTableColumnConfigs = new List<DataTableColumnConfig>()
+            List<DataTableColumnConfig> dataTableColumnConfigs = new()
             {
                 new DataTableColumnConfig()
                 {
@@ -98,40 +94,36 @@ namespace EmployeeAccountingView
             };
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
-
         private void LoadData()
         {
             employeeDataTable.Clear();
             employeeDataTable.AddTable(_employeeLogic.Read(null));
         }
-
         private void CreateEmployee()
         {
-            var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
+            FormCreateOrUpdateEmployee form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
             form.ShowDialog();
             LoadData();
         }
-
         private void UpdateEmployee()
         {
-            var selectedEmployee = employeeDataTable.GetSelectedObject<EmployeeViewModel>();
-            if (selectedEmployee != null)
-            {
-                var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
-                form.EmployeeId = selectedEmployee.Id;
-                form.ShowDialog();
-                LoadData();
-            }
-            else
+            EmployeeViewModel? selectedEmployee = employeeDataTable.GetSelectedObject<EmployeeViewModel>();
+            
+            if (selectedEmployee == null)
             {
                 MessageBox.Show(
                     "Не был выбран сотрудник",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
-        }
 
+            FormCreateOrUpdateEmployee form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
+            form.EmployeeId = selectedEmployee.Id;
+            form.ShowDialog();
+            LoadData();
+        }
         private void DeleteEmployee()
         {
             var dialogResult = MessageBox.Show(
@@ -146,58 +138,55 @@ namespace EmployeeAccountingView
                 LoadData();
             }
         }
-
         private void CreateDocument()
         {
             List<byte[]> images = new();
 
-            using (var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg", Multiselect = true })
+            using var openFileDialog = new OpenFileDialog() { 
+                Filter = "Файлы изображений|*.bmp;*.png;*.jpg", 
+                Multiselect = true 
+            };
+            using var saveFileDialog = new SaveFileDialog { 
+                Filter = "docx|*.docx" 
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    images.AddRange(
-                        dialog.FileNames
-                        .Select(image => File.ReadAllBytes(image))
-                        .Concat(_employeeLogic.Read(null)
-                            .Select(employee => employee.Photo)));
-                }
+                images.AddRange(
+                    openFileDialog.FileNames
+                    .Select(image => File.ReadAllBytes(image))
+                    .Concat(_employeeLogic
+                        .Read(null).Select(employee => employee.Photo ?? throw new Exception("Фото сотрудника было не найдено"))));
             }
 
-            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
             {
-
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    componentDocumentWithContextImageWord.CreateDoc(new ComponentDocumentWithContextImageConfig
-                    {
-                        FilePath = dialog.FileName,
-                        Header = "Изображения",
-                        Images = images
-                    });
-                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+                
+            componentDocumentWithContextImageWord.CreateDoc(new ComponentDocumentWithContextImageConfig
+            {
+                FilePath = saveFileDialog.FileName,
+                Header = "Изображения",
+                Images = images
+            });
+            MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void CreateTable()
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" })
+            using var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" };
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
+                componentDocumentWithTableHeaderRowPdf.CreateDoc(new ComponentDocumentWithTableHeaderDataConfig<EmployeeViewModel>
                 {
-                    componentDocumentWithTableHeaderRowPdf.CreateDoc(new ComponentDocumentWithTableHeaderDataConfig<EmployeeViewModel>
-                    {
-                        FilePath = dialog.FileName,
-                        Header = "Сотрудники",
-                        UseUnion = true,
-                        ColumnsRowsWidth = new List<(int, int)> { (7, 0), (20, 0), (20, 0), (20, 0) },
-                        ColumnUnion = new List<(int StartIndex, int Count)> { (2, 2) },
-                        Headers = new List<(int ColumnIndex, int RowIndex, string Header, string PropertyName)>
+                    FilePath = dialog.FileName,
+                    Header = "Сотрудники",
+                    UseUnion = true,
+                    ColumnsRowsWidth = new List<(int, int)> { (7, 0), (20, 0), (20, 0), (20, 0) },
+                    ColumnUnion = new List<(int StartIndex, int Count)> { (2, 2) },
+                    Headers = new List<(int ColumnIndex, int RowIndex, string Header, string PropertyName)>
                         {
                             (0, 0, "Идент.", "Id"),
                             (1, 0, "ФИО", "Fullname"),
@@ -205,52 +194,47 @@ namespace EmployeeAccountingView
                             (2, 1, "Номер телефона", "PhoneNumber"),
                             (3, 1, "Навык", "SkillName"),
                         },
-                        Data = _employeeLogic.Read(null)
-                    });
-                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    Data = _employeeLogic.Read(null)
+                });
+                MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void CreateDiagram()
         {
-            using (var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" })
+            using var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
+                componentDocumentWithChartBarExcel.CreateDoc(new ComponentDocumentWithChartConfig
                 {
-                    componentDocumentWithChartBarExcel.CreateDoc(new ComponentDocumentWithChartConfig
-                    {
-                        FilePath = dialog.FileName,
-                        Header = "Навыки сотрудников",
-                        ChartTitle = "Гистограмма навыков",
-                        LegendLocation = ComponentsLibraryNet60.Models.Location.Bottom,
-                        Data = new Dictionary<string, List<(int Date, double Value)>>
+                    FilePath = dialog.FileName,
+                    Header = "Навыки сотрудников",
+                    ChartTitle = "Гистограмма навыков",
+                    LegendLocation = ComponentsLibraryNet60.Models.Location.Bottom,
+                    Data = new Dictionary<string, List<(int Date, double Value)>>
                         {
                             {
                                 "Серия 1",
                                 _skillLogic
                                 .Read(null)
                                 .Select(skill => (
-                                    (int)skill.Id,
+                                    skill.Id ?? throw new Exception("Id навыка имеет значение null"),
                                     (double)_employeeLogic.Read(null)
                                     .Count(employee => skill.Name == employee.SkillName)))
                                 .ToList()
                             }
                         }
-                    });
-                    MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                });
+                MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void OpenFormSkills()
         {
             var form = NinjectKernel.GetInstance().Get<FormSkills>();

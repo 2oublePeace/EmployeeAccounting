@@ -2,7 +2,6 @@
 using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingBusinessLogic.ViewModels;
 using EmployeeAccountingDatabase.Models;
-using System.Xml.Linq;
 
 namespace EmployeeAccountingDatabase.Implements
 {
@@ -14,7 +13,7 @@ namespace EmployeeAccountingDatabase.Implements
                 throw new Exception("Ошибка при поиске записи навыка");
 
             using var context = new EmployeeAccountingDatabaseContext();
-            var skill = context.Skills.FirstOrDefault(skill => skill.Name == model.Name || skill.Id == model.Id);
+            Skill? skill = context.Skills.FirstOrDefault(skill => skill.Name == model.Name || skill.Id == model.Id);
 
             return skill != null ?
                 new SkillViewModel
@@ -73,7 +72,7 @@ namespace EmployeeAccountingDatabase.Implements
                 throw new Exception("Ошибка при обновлении записи навыка");
 
             using var context = new EmployeeAccountingDatabaseContext();
-            var skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ?? 
+            Skill skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ?? 
                 throw new Exception("Навык не найден");
             
             skill.Id = model.Id;
@@ -88,7 +87,7 @@ namespace EmployeeAccountingDatabase.Implements
                 throw new Exception("Ошибка при удалении записи навыка");
 
             using var context = new EmployeeAccountingDatabaseContext();
-            var skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ??
+            Skill skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ??
                 throw new Exception("Навык не найден");
             
             context.Skills.Remove(skill);

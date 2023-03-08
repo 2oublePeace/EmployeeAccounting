@@ -12,32 +12,36 @@ public class EmployeeLogic
         _employeeStorage = employeeStorage;
     }
 
-    public List<EmployeeViewModel> Read(EmployeeBindingModel model)
+    public List<EmployeeViewModel> Read(EmployeeBindingModel? model)
     {
         if (model == null)
         {
             return _employeeStorage.GetFullList();
         }
+
         if (model.Id.HasValue)
         {
-            return new List<EmployeeViewModel> { _employeeStorage.GetElement(model) };
+            return new List<EmployeeViewModel> { 
+                _employeeStorage.GetElement(model) ?? 
+                    throw new Exception("Сотрудник не найден")
+            };
         }
+
         return _employeeStorage.GetFilteredList(model);
     }
 
     public void CreateOrUpdate(EmployeeBindingModel model)
     {
-        var employee = _employeeStorage.GetElement
-        (
-            new EmployeeBindingModel
-            {
-                Fullname = model.Fullname
-            }
-        );
+        EmployeeViewModel? employee = _employeeStorage.GetElement(new EmployeeBindingModel
+        {
+            Fullname = model.Fullname
+        });
+
         if (employee != null && employee.Id != model.Id)
         {
             throw new Exception("Уже есть сотрудник с таким ФИО");
         }
+
         if (model.Id.HasValue)
         {
             _employeeStorage.Update(model);
@@ -49,11 +53,8 @@ public class EmployeeLogic
     }
     public void Delete(EmployeeBindingModel model)
     {
-        var employee = _employeeStorage.GetElement(new EmployeeBindingModel { Id = model.Id });
-        if (employee == null)
-        {
+        _ = _employeeStorage.GetElement(new EmployeeBindingModel { Id = model.Id }) ?? 
             throw new Exception("Сотрудник не найден");
-        }
         _employeeStorage.Delete(model);
     }
 }

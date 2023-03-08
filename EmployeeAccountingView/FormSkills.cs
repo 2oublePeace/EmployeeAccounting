@@ -13,9 +13,7 @@ namespace EmployeeAccountingView
             InitializeComponent();
             _skillLogic = skillLogic;
         }
-
         private void FormSkills_Load(object sender, EventArgs e) => LoadData();
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -29,21 +27,18 @@ namespace EmployeeAccountingView
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
         private void LoadData()
         {
             skillDataGridView.DataSource = new BindingList<SkillViewModel>(_skillLogic.Read(null));
             skillDataGridView.Columns[0].Visible = false;
             skillDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-
         private void InsertEmptyRow()
         {
             var skills = (BindingList<SkillViewModel>)skillDataGridView.DataSource;
             skills.Add(new SkillViewModel());
             skillDataGridView.DataSource = new BindingList<SkillViewModel>(skills);
         }
-
         private void DeleteSelectedRowOrSkill()
         {
             var dialogResult = MessageBox.Show(
@@ -65,7 +60,6 @@ namespace EmployeeAccountingView
                 }
             }
         }
-
         private void SkillDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (!string.IsNullOrEmpty((string)skillDataGridView.CurrentRow.Cells[1].Value))
