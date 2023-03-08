@@ -40,6 +40,7 @@
             componentDocumentWithContextImageWord = new ComponentsLibraryNet60.DocumentWithContext.ComponentDocumentWithContextImageWord(components);
             componentDocumentWithTableHeaderRowPdf = new ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableHeaderRowPdf(components);
             componentDocumentWithChartBarExcel = new ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarExcel(components);
+            skillsToolStripMenuItem = new ToolStripMenuItem();
             controlDataTableMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,9 +57,9 @@
             // 
             // controlDataTableMenuStrip
             // 
-            controlDataTableMenuStrip.Items.AddRange(new ToolStripItem[] { createEmployeeToolStripMenuItem, editEmployeeToolStripMenuItem, deleteEmployeeToolStripMenuItem, createDocumentToolStripMenuItem, createTableToolStripMenuItem, createDiagramToolStripMenuItem });
+            controlDataTableMenuStrip.Items.AddRange(new ToolStripItem[] { createEmployeeToolStripMenuItem, editEmployeeToolStripMenuItem, deleteEmployeeToolStripMenuItem, createDocumentToolStripMenuItem, createTableToolStripMenuItem, createDiagramToolStripMenuItem, skillsToolStripMenuItem });
             controlDataTableMenuStrip.Name = "controlDataTableMenuStrip";
-            controlDataTableMenuStrip.Size = new Size(221, 136);
+            controlDataTableMenuStrip.Size = new Size(221, 180);
             // 
             // createEmployeeToolStripMenuItem
             // 
@@ -102,6 +103,13 @@
             createDiagramToolStripMenuItem.Text = "Создать диграмму";
             createDiagramToolStripMenuItem.Click += CreateDiagramToolStripMenuItem_Click;
             // 
+            // skillsToolStripMenuItem
+            // 
+            skillsToolStripMenuItem.Name = "skillsToolStripMenuItem";
+            skillsToolStripMenuItem.Size = new Size(220, 22);
+            skillsToolStripMenuItem.Text = "Навыки";
+            skillsToolStripMenuItem.Click += SkillsToolStripMenuItem_Click;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -129,5 +137,6 @@
         private ComponentsLibraryNet60.DocumentWithContext.ComponentDocumentWithContextImageWord componentDocumentWithContextImageWord;
         private ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableHeaderRowPdf componentDocumentWithTableHeaderRowPdf;
         private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarExcel componentDocumentWithChartBarExcel;
+        private ToolStripMenuItem skillsToolStripMenuItem;
     }
 }

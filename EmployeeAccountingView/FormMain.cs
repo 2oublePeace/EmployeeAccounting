@@ -32,6 +32,7 @@ namespace EmployeeAccountingView
         private void CreateDocumentToolStripMenuItem_Click(object sender, EventArgs e) => CreateDocument();
         private void CreateTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
         private void CreateDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
+        private void SkillsToolStripMenuItem_Click(object sender, EventArgs e) => OpenFormSkills();
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
