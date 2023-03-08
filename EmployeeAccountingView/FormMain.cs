@@ -114,13 +114,21 @@ namespace EmployeeAccountingView
 
         private void UpdateEmployee()
         {
-            var selectedEmployeeId = employeeDataTable.GetSelectedObject<EmployeeViewModel>().Id;
-            if (selectedEmployeeId != null)
+            var selectedEmployee = employeeDataTable.GetSelectedObject<EmployeeViewModel>();
+            if (selectedEmployee != null)
             {
                 var form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
-                form.EmployeeId = selectedEmployeeId;
+                form.EmployeeId = selectedEmployee.Id;
                 form.ShowDialog();
                 LoadData();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Не был выбран сотрудник",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
