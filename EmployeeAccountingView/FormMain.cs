@@ -56,7 +56,7 @@ namespace EmployeeAccountingView
                     CreateDiagram();
                     return true;
                 case Keys.Control | Keys.O:
-                    OpenSkills();
+                    OpenFormSkills();
                     return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -242,7 +242,7 @@ namespace EmployeeAccountingView
             }
         }
 
-        private void OpenSkills()
+        private void OpenFormSkills()
         {
             var form = NinjectKernel.GetInstance().Get<FormSkills>();
             form.ShowDialog();
