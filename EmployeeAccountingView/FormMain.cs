@@ -16,13 +16,13 @@ namespace EmployeeAccountingView
         public FormMain(EmployeeLogic employeeLogic, SkillLogic skillLogic)
         {
             InitializeComponent();
+            InitializeTable();
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            InitializeTable();
             LoadData();
         }
 
