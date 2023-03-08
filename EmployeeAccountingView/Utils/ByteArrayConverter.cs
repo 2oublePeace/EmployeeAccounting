@@ -8,6 +8,7 @@
             image.Save(memoryStream, image.RawFormat);
             return memoryStream.ToArray();
         }
+
         public static Image ByteArrayToImage(byte[] byteArray)
         {
             using var memoryStream = new MemoryStream(byteArray);

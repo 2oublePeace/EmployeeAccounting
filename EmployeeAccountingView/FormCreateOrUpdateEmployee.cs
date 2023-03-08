@@ -12,16 +12,19 @@ namespace EmployeeAccountingView
         private readonly EmployeeLogic _employeeLogic;
         private readonly SkillLogic _skillLogic;
         public int? EmployeeId { get; set; }
+        
         public FormCreateOrUpdateEmployee(EmployeeLogic employeeLogic, SkillLogic skillLogic)
         {
             InitializeComponent();
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
         }
+        
         private void FormAddEmployee_Load(object sender, EventArgs e)
         {
             LoadData();
         }
+        
         private void BrowsePhotoButton_Click(object sender, EventArgs e)
         {
             using var dialog = new OpenFileDialog() { Filter = "Файлы изображений|*.bmp;*.png;*.jpg" };
@@ -30,10 +33,12 @@ namespace EmployeeAccountingView
                 photoPictureBox.Image = Image.FromFile(dialog.FileName);
             }
         }
+        
         private void ClearPhotoButton_Click(object sender, EventArgs e)
         {
             photoPictureBox.Image = null;
         }
+        
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(fullnameTextBox.Text))
@@ -65,6 +70,7 @@ namespace EmployeeAccountingView
             DialogResult = DialogResult.OK;
             Close();
         }
+        
         private void CancelButton_Click(object sender, EventArgs e)
         {
             if (IsElementValuesChanged(EmployeeId))
@@ -86,6 +92,7 @@ namespace EmployeeAccountingView
                 Close();
             }
         }
+        
         private void LoadData()
         {
             skillsListBox.Items.AddRange(_skillLogic
@@ -110,6 +117,7 @@ namespace EmployeeAccountingView
                     throw new Exception("Не найдено фото сотрудника"));
             }
         }
+        
         private static void LoadPhoneNumberTextBox(ControlInputRegex controlInputRegex, string phoneNumber)
         {
             Type type = typeof(ControlInputRegex);
@@ -119,6 +127,7 @@ namespace EmployeeAccountingView
                 throw new Exception("Текстовое поле имеет значение null");
             textBox.Text = phoneNumber;
         }
+        
         private bool IsElementValuesChanged(int? employeeId)
         {
             if (employeeId == null)

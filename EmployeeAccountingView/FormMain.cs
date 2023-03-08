@@ -20,17 +20,26 @@ namespace EmployeeAccountingView
             _employeeLogic = employeeLogic;
             _skillLogic = skillLogic;
         }
+        
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
         }
+        
         private void CreateEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => CreateEmployee();
+        
         private void EditEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => UpdateEmployee();
+        
         private void DeleteEmployeeToolStripMenuItem_Click(object sender, EventArgs e) => DeleteEmployee();
+        
         private void CreateDocumentToolStripMenuItem_Click(object sender, EventArgs e) => CreateDocument();
+        
         private void CreateTableToolStripMenuItem_Click(object sender, EventArgs e) => CreateTable();
+        
         private void CreateDiagramToolStripMenuItem_Click(object sender, EventArgs e) => CreateDiagram();
+        
         private void SkillsToolStripMenuItem_Click(object sender, EventArgs e) => OpenFormSkills();
+        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -59,6 +68,7 @@ namespace EmployeeAccountingView
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+        
         private void InitializeTable()
         {
             List<DataTableColumnConfig> dataTableColumnConfigs = new()
@@ -94,17 +104,20 @@ namespace EmployeeAccountingView
             };
             employeeDataTable.LoadColumns(dataTableColumnConfigs);
         }
+        
         private void LoadData()
         {
             employeeDataTable.Clear();
             employeeDataTable.AddTable(_employeeLogic.Read(null));
         }
+        
         private void CreateEmployee()
         {
             FormCreateOrUpdateEmployee form = NinjectKernel.GetInstance().Get<FormCreateOrUpdateEmployee>();
             form.ShowDialog();
             LoadData();
         }
+        
         private void UpdateEmployee()
         {
             EmployeeViewModel? selectedEmployee = employeeDataTable.GetSelectedObject<EmployeeViewModel>();
@@ -124,6 +137,7 @@ namespace EmployeeAccountingView
             form.ShowDialog();
             LoadData();
         }
+        
         private void DeleteEmployee()
         {
             var dialogResult = MessageBox.Show(
@@ -138,6 +152,7 @@ namespace EmployeeAccountingView
                 LoadData();
             }
         }
+        
         private void CreateDocument()
         {
             List<byte[]> images = new();
@@ -173,6 +188,7 @@ namespace EmployeeAccountingView
             });
             MessageBox.Show("Создание прошло успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        
         private void CreateTable()
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -203,6 +219,7 @@ namespace EmployeeAccountingView
                 MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
         private void CreateDiagram()
         {
             using var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" };
@@ -235,6 +252,7 @@ namespace EmployeeAccountingView
                 MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
         private void OpenFormSkills()
         {
             var form = NinjectKernel.GetInstance().Get<FormSkills>();
