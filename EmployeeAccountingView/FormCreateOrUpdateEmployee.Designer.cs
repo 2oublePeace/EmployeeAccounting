@@ -241,7 +241,7 @@
             Controls.Add(tableLayoutPanel);
             Name = "FormCreateOrUpdateEmployee";
             Padding = new Padding(10);
-            Text = "Создание сотрудника";
+            Text = "Сотрудник";
             Load += FormAddEmployee_Load;
             tableLayoutPanel.ResumeLayout(false);
             flowLayoutPanelImage.ResumeLayout(false);

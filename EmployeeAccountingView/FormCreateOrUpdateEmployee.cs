@@ -70,7 +70,7 @@ namespace EmployeeAccountingView
             DialogResult = DialogResult.OK;
             Close();
         }
-        
+
         private void CancelButton_Click(object sender, EventArgs e)
         {
             if (IsElementValuesChanged(EmployeeId))
@@ -92,7 +92,7 @@ namespace EmployeeAccountingView
                 Close();
             }
         }
-        
+
         private void LoadData()
         {
             skillsListBox.Items.AddRange(_skillLogic.Read(null).Select(skill => skill.Name).ToArray());
@@ -108,7 +108,7 @@ namespace EmployeeAccountingView
                 }
             }
         }
-        
+
         private void LoadPhoneNumberTextBox(ControlInputRegex controlInputRegex, string phoneNumber)
         {
             Type type = typeof(ControlInputRegex);
@@ -116,7 +116,7 @@ namespace EmployeeAccountingView
             TextBox textBox = (TextBox)fieldInfo.GetValue(controlInputRegex);
             textBox.Text = phoneNumber;
         }
-        
+
         private bool IsElementValuesChanged(int? employeeId)
         {
             if (employeeId == null)
