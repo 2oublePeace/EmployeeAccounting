@@ -7,6 +7,7 @@ namespace EmployeeAccountingBusinessLogic.BusinessLogic;
 public class EmployeeLogic
 {
     private readonly IEmployeeStorage _employeeStorage;
+
     public EmployeeLogic(IEmployeeStorage employeeStorage)
     {
         _employeeStorage = employeeStorage;
@@ -42,6 +43,7 @@ public class EmployeeLogic
         
         _employeeStorage.Insert(model);
     }
+
     public void Delete(EmployeeBindingModel model)
     {
         _employeeStorage.Delete(model);

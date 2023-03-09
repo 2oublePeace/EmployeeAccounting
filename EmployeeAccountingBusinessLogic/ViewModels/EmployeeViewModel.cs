@@ -9,7 +9,7 @@ public class EmployeeViewModel
     public string? Fullname { get; set; }
     public byte[]? Photo { get; set; }
     [DisplayName("Навык")]
-    public string SkillName { get; set; } = "Не выбран";
+    public string? SkillName { get; set; }
     [DisplayName("Телефон")]
     public string? PhoneNumber { get; set; }
 }

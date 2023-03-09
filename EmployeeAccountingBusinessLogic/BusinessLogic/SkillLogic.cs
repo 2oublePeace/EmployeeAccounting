@@ -7,6 +7,7 @@ namespace EmployeeAccountingBusinessLogic.BusinessLogic
     public class SkillLogic
     {
         private readonly ISkillStorage _skillStorage;
+
         public SkillLogic(ISkillStorage skillStorage)
         {
             _skillStorage = skillStorage;
@@ -41,6 +42,7 @@ namespace EmployeeAccountingBusinessLogic.BusinessLogic
             
             _skillStorage.Insert(model);
         }
+
         public void Delete(SkillBindingModel model)
         {
             _skillStorage.Delete(model);
