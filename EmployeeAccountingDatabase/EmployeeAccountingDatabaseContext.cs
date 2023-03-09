@@ -9,11 +9,7 @@ namespace EmployeeAccountingDatabase
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Skill> Skills => Set<Skill>();
 
-        public EmployeeAccountingDatabaseContext() 
-        {
-           /* Database.EnsureDeleted();*/
-            Database.EnsureCreated();
-        }
+        public EmployeeAccountingDatabaseContext() => Database.EnsureCreated();
             
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

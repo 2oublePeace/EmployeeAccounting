@@ -101,6 +101,8 @@ namespace EmployeeAccountingView
                 .Select(skill => skill.Name ?? throw new Exception("Не найдено имя навыка"))
                 .ToArray());
 
+            phoneNumberTextBox.SetToolTip("8-999-99-99");
+
             if (EmployeeId != null)
             {
                 EmployeeViewModel employee = _employeeLogic
