@@ -171,7 +171,9 @@ namespace EmployeeAccountingView
                     openFileDialog.FileNames
                     .Select(image => File.ReadAllBytes(image))
                     .Concat(_employeeLogic
-                        .Read(null).Select(employee => employee.Photo ?? throw new Exception("Фото сотрудника было не найдено"))));
+                        .Read(null)
+                        .Select(employee => employee.Photo ?? 
+                            throw new Exception("Фото сотрудника было не найдено"))));
             }
 
             if (saveFileDialog.ShowDialog() != DialogResult.OK)

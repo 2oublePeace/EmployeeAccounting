@@ -14,46 +14,35 @@ namespace EmployeeAccountingBusinessLogic.BusinessLogic
 
         public List<SkillViewModel> Read(SkillBindingModel? model)
         {
-            if (model == null)
-            {
-                return _skillStorage.GetFullList();
-            }
-
-            if (model.Id.HasValue)
-            {
-                return new List<SkillViewModel> {
-                    _skillStorage.GetElement(model) ?? 
-                        throw new Exception("Сотрудник не найден")
-                };
-            }
-
+            if (model == null) return _skillStorage.GetFullList();
+            
+            if (model.Id.HasValue) return new List<SkillViewModel> {
+                _skillStorage.GetElement(model) ?? throw new Exception("Навык не найден")
+            };
+            
             return _skillStorage.GetFilteredList(model);
         }
 
         public void CreateOrUpdate(SkillBindingModel model)
         {
+            if (model == null) throw new Exception("Ошибка при создании записи навыка");
+
             SkillViewModel? skill = _skillStorage.GetElement(new SkillBindingModel {
                 Name = model.Name
             });
             
-            if (skill != null && skill.Id != model.Id)
-            {
-                throw new Exception("Уже есть навык с таким названием");
-            }
+            if (skill != null && skill.Id != model.Id) throw new Exception("Уже есть навык с таким названием");
 
             if (model.Id.HasValue)
             {
                 _skillStorage.Update(model);
+                return;
             }
-            else
-            {
-                _skillStorage.Insert(model);
-            }
+            
+            _skillStorage.Insert(model);
         }
         public void Delete(SkillBindingModel model)
         {
-            _ = _skillStorage.GetElement(new SkillBindingModel { Id = model.Id }) ??
-                throw new Exception("Навык не найден");
             _skillStorage.Delete(model);
         }
     }

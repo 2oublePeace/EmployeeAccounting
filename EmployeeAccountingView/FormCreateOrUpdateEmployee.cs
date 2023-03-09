@@ -9,6 +9,7 @@ namespace EmployeeAccountingView
 {
     public partial class FormCreateOrUpdateEmployee : Form
     {
+        private const string SKILL_NAME_DEFAULT_VALUE = "Не выбран";
         private readonly EmployeeLogic _employeeLogic;
         private readonly SkillLogic _skillLogic;
         public int? EmployeeId { get; set; }
@@ -103,10 +104,8 @@ namespace EmployeeAccountingView
             if (EmployeeId != null)
             {
                 EmployeeViewModel employee = _employeeLogic
-                    .Read(new EmployeeBindingModel { 
-                        Id = EmployeeId })
-                    .FirstOrDefault() ??
-                        throw new Exception("Не найден сотрудник");
+                    .Read(new EmployeeBindingModel { Id = EmployeeId })
+                    .FirstOrDefault() ?? throw new Exception("Не найден сотрудник");
                 
                 fullnameTextBox.Text = employee.Fullname;
                 LoadPhoneNumberTextBox(phoneNumberTextBox, employee.PhoneNumber ?? 
@@ -144,11 +143,11 @@ namespace EmployeeAccountingView
             {
                 EmployeeViewModel employee = _employeeLogic
                     .Read(new EmployeeBindingModel { Id = employeeId })
-                    .FirstOrDefault() ??
-                        throw new Exception("Сотрудник не найден");
+                    .FirstOrDefault() ?? throw new Exception("Сотрудник не найден");
 
                 if (fullnameTextBox.Text != employee.Fullname ||
-                    skillsListBox.SelectedElement != employee.SkillName ||
+                    skillsListBox.SelectedElement != employee.SkillName && 
+                    !employee.SkillName.Equals(SKILL_NAME_DEFAULT_VALUE) ||
                     phoneNumberTextBox.Value != employee.PhoneNumber ||
                     ByteArrayConverter.ImageToByteArray(photoPictureBox.Image).Equals(employee.Photo))
                 {

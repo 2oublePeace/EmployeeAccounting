@@ -2,6 +2,7 @@
 using EmployeeAccountingBusinessLogic.Interfaces;
 using EmployeeAccountingBusinessLogic.ViewModels;
 using EmployeeAccountingDatabase.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeAccountingDatabase.Implements;
 
@@ -12,42 +13,40 @@ public class EmployeeStorage : IEmployeeStorage
         using var context = new EmployeeAccountingDatabaseContext();
         
         return context.Employees
+            .Include(employee => employee.Skill)
             .Select(employee => new EmployeeViewModel {
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                SkillName = employee.Skill!.Name,
+                SkillName = employee.Skill != null ? employee.Skill.Name : "Не выбран",
                 PhoneNumber = employee.PhoneNumber
             })
             .ToList();
     }
 
     public List<EmployeeViewModel> GetFilteredList(EmployeeBindingModel model)
-    {
-        if (model == null)
-            throw new Exception("Ошибка при поиске записей сотрудников");
-        
+    {       
         using var context = new EmployeeAccountingDatabaseContext();
         
         return context.Employees
-            .Where(employee => employee.Fullname == model.Fullname)
+            .Include(employee => employee.Skill)
+            .Where(employee => employee.Skill != null && employee.Skill.Name == model.SkillName)
             .Select(employee => new EmployeeViewModel {
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                SkillName = employee.Skill!.Name,
+                SkillName = employee.Skill != null ? employee.Skill.Name : "Не выбран",
                 PhoneNumber = employee.PhoneNumber
             })
             .ToList();
     }
 
     public EmployeeViewModel? GetElement(EmployeeBindingModel model)
-    {
-        if (model == null)
-            throw new Exception("Ошибка при поиске записи сотрудника");
-        
+    { 
         using var context = new EmployeeAccountingDatabaseContext();
-        Employee? employee = context.Employees.FirstOrDefault(employee => employee.Fullname == model.Fullname || employee.Id == model.Id);
+        Employee? employee = context.Employees
+            .Include(employee => employee.Skill)
+            .FirstOrDefault(employee => employee.Id == model.Id || employee.Fullname == model.Fullname);
 
         return employee != null ?
             new EmployeeViewModel
@@ -55,7 +54,7 @@ public class EmployeeStorage : IEmployeeStorage
                 Id = employee.Id,
                 Fullname = employee.Fullname,
                 Photo = employee.Photo,
-                SkillName = employee.Skill!.Name,
+                SkillName = employee.Skill != null ? employee.Skill.Name : "Не выбран",
                 PhoneNumber = employee.PhoneNumber
             } :
             null;
@@ -63,15 +62,13 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Insert(EmployeeBindingModel model)
     {
-        if (model == null)
-            throw new Exception("Ошибка при создании записи сотрудника"); 
-
         using var context = new EmployeeAccountingDatabaseContext();
 
         context.Add(new Employee {
             Fullname = model.Fullname,
             Photo = model.Photo,
             SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName)!.Id,
+            Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName)!,
             PhoneNumber = model.PhoneNumber
         });
         context.SaveChanges();
@@ -79,9 +76,6 @@ public class EmployeeStorage : IEmployeeStorage
 
     public void Update(EmployeeBindingModel model)
     {
-        if (model == null)
-            throw new Exception("Ошибка при обновлении записи сотрудника");
-        
         using var context = new EmployeeAccountingDatabaseContext();
         Employee employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id) ??
             throw new Exception("Сотрудник не найден");
@@ -89,16 +83,14 @@ public class EmployeeStorage : IEmployeeStorage
         employee.Fullname = model.Fullname;
         employee.Photo = model.Photo;
         employee.SkillId = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName)!.Id;
+        employee.Skill = context.Skills.FirstOrDefault(skill => skill.Name == model.SkillName)!;
         employee.PhoneNumber = model.PhoneNumber;
         
         context.SaveChanges();
     }
 
     public void Delete(EmployeeBindingModel model)
-    {
-        if (model == null)
-            throw new Exception("Ошибка при удалении записи сотрудника");
-        
+    { 
         using var context = new EmployeeAccountingDatabaseContext();
         Employee employee = context.Employees.FirstOrDefault(employee => employee.Id == model.Id) ??
             throw new Exception("Сотрудник не найден");

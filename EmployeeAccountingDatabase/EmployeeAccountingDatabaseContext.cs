@@ -1,5 +1,6 @@
 ﻿using EmployeeAccountingDatabase.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace EmployeeAccountingDatabase
 {
@@ -8,11 +9,23 @@ namespace EmployeeAccountingDatabase
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Skill> Skills => Set<Skill>();
 
-        public EmployeeAccountingDatabaseContext() => Database.EnsureCreated();
-
+        public EmployeeAccountingDatabaseContext() 
+        {
+           /* Database.EnsureDeleted();*/
+            Database.EnsureCreated();
+        }
+            
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=employee_accounting.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.Skill)
+                .WithMany(s => s.Employees)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

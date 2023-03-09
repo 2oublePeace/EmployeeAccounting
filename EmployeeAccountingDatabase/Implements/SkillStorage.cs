@@ -9,9 +9,6 @@ namespace EmployeeAccountingDatabase.Implements
     {
         public SkillViewModel? GetElement(SkillBindingModel model)
         {
-            if (model == null)
-                throw new Exception("Ошибка при поиске записи навыка");
-
             using var context = new EmployeeAccountingDatabaseContext();
             Skill? skill = context.Skills.FirstOrDefault(skill => skill.Name == model.Name || skill.Id == model.Id);
 
@@ -26,9 +23,6 @@ namespace EmployeeAccountingDatabase.Implements
 
         public List<SkillViewModel> GetFilteredList(SkillBindingModel model)
         {
-            if (model == null)
-                throw new Exception("Ошибка при поиске записей навыков");
-
             using var context = new EmployeeAccountingDatabaseContext();
             
             return context.Skills
@@ -60,7 +54,6 @@ namespace EmployeeAccountingDatabase.Implements
             using var context = new EmployeeAccountingDatabaseContext();
             
             context.Add(new Skill {
-                Id = model.Id,
                 Name = model.Name
             });
             context.SaveChanges();
@@ -68,14 +61,10 @@ namespace EmployeeAccountingDatabase.Implements
 
         public void Update(SkillBindingModel model)
         {
-            if (model == null)
-                throw new Exception("Ошибка при обновлении записи навыка");
-
             using var context = new EmployeeAccountingDatabaseContext();
             Skill skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ?? 
                 throw new Exception("Навык не найден");
             
-            skill.Id = model.Id;
             skill.Name = model.Name;
             
             context.SaveChanges();
@@ -83,9 +72,6 @@ namespace EmployeeAccountingDatabase.Implements
 
         public void Delete(SkillBindingModel model)
         {
-            if (model == null)
-                throw new Exception("Ошибка при удалении записи навыка");
-
             using var context = new EmployeeAccountingDatabaseContext();
             Skill skill = context.Skills.FirstOrDefault(skill => skill.Id == model.Id) ??
                 throw new Exception("Навык не найден");
